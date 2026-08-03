@@ -24,8 +24,8 @@ export function Navbar() {
   const whatsappHref = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE)
   const homeClassName = ({ isActive }: { isActive: boolean }) =>
     cn(
-      "relative px-4 py-2 text-sm font-medium text-white/85 hover:text-primary",
-      isActive && "text-primary",
+      "relative rounded-xl px-4 py-2 text-sm font-medium text-white/85 hover:bg-primary/10 hover:text-primary",
+      isActive && "bg-primary/10 text-primary",
     )
 
   return (
