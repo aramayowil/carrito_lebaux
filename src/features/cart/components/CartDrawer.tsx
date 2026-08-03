@@ -45,13 +45,13 @@ export function CartDrawer() {
         side="right"
         className="w-full max-w-full gap-0 p-0 sm:max-w-lg"
       >
-        <SheetHeader className="border-b pr-16">
-          <div className="flex items-start justify-between gap-4">
+        <SheetHeader className="border-b px-4 py-3 pr-24 sm:pl-5">
+          <div className="flex items-center justify-between gap-3">
             <div>
-              <SheetTitle className="text-lg uppercase tracking-wide">
+              <SheetTitle className="text-base uppercase tracking-wide">
                 Tu pedido
               </SheetTitle>
-              <SheetDescription>
+              <SheetDescription className="mt-0.5 text-xs">
                 {totals.cantidadItems === 0
                   ? "Todavía no agregaste productos."
                   : `${totals.cantidadItems} unidades configuradas`}
@@ -68,7 +68,7 @@ export function CartDrawer() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-muted-foreground"
+                      className="shrink-0 text-muted-foreground"
                     />
                   }
                 >
@@ -103,39 +103,47 @@ export function CartDrawer() {
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center text-muted-foreground">
-            <span className="rounded-full bg-muted p-5">
-              <ShoppingCart className="size-10 opacity-60" />
+          <div className="flex flex-1 flex-col items-center justify-center gap-2 px-5 py-10 text-center text-muted-foreground">
+            <span className="mb-1 rounded-2xl bg-primary/10 p-3 text-primary">
+              <ShoppingCart className="size-7" />
             </span>
-            <p className="font-medium text-foreground">Tu carrito está vacío</p>
-            <p className="max-w-xs text-sm">
+            <p className="text-sm font-semibold text-foreground">
+              Tu carrito está vacío
+            </p>
+            <p className="max-w-64 text-xs leading-5">
               Elegí una abertura, configurá sus opciones y agregala para empezar
               el pedido.
             </p>
           </div>
         ) : (
           <>
-            <div className="flex-1 space-y-3 overflow-y-auto p-4 sm:p-6">
+            <div className="flex-1 space-y-2 overflow-y-auto p-3 sm:p-4">
               {items.map((item) => (
                 <CartItemRow key={item.id} item={item} />
               ))}
             </div>
 
-            <div className="space-y-4 border-t bg-card p-4 sm:p-6">
-              <div className="flex items-center justify-between gap-4 text-sm">
-                <span className="text-muted-foreground">Total contado</span>
-                <span className="font-bold text-success">
-                  {formatProductPrice(totals.totalContado)}
-                </span>
+            <div className="border-t bg-muted/30 p-3 sm:p-4">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-4 text-sm">
+                  <span className="text-muted-foreground">Total contado</span>
+                  <span className="font-bold tabular-nums text-success">
+                    {formatProductPrice(totals.totalContado)}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-4 text-sm">
+                  <span className="text-muted-foreground">Total tarjeta</span>
+                  <span className="font-bold tabular-nums">
+                    {formatProductPrice(totals.totalTarjeta)}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center justify-between gap-4 text-sm">
-                <span className="text-muted-foreground">Total tarjeta</span>
-                <span className="font-bold">
-                  {formatProductPrice(totals.totalTarjeta)}
-                </span>
-              </div>
-              <Separator />
-              <Button size="lg" className="w-full" onClick={abrirCheckout}>
+              <Separator className="my-3" />
+              <Button
+                size="lg"
+                className="w-full rounded-xl"
+                onClick={abrirCheckout}
+              >
                 Continuar pedido
               </Button>
             </div>

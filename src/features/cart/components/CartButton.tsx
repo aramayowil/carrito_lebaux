@@ -14,12 +14,6 @@ export function CartButton() {
 
   return (
     <div className="fixed bottom-5 right-5 z-40 sm:bottom-7 sm:right-7">
-      {count > 0 && (
-        <span
-          className="animate-cart-wave pointer-events-none absolute inset-0 rounded-full bg-primary/30"
-          aria-hidden="true"
-        />
-      )}
       <Button
         size="icon-lg"
         onClick={abrirCarrito}

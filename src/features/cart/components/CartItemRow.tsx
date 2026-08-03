@@ -18,13 +18,40 @@ export function CartItemRow({ item }: CartItemRowProps) {
   const eliminarItem = useCartStore((state) => state.eliminarItem)
 
   return (
-    <Card className="gap-0 border border-border/70 py-0">
-      <CardContent className="grid gap-3 p-3 sm:grid-cols-[5.5rem_1fr]">
-        <ProductImage
-          src={item.producto.imagen}
-          alt={item.producto.nombre}
-          className="h-36 w-full rounded-xl border bg-white sm:h-22 sm:w-22"
-        />
+    <Card size="sm" className="gap-0 border border-border/70 py-0">
+      <CardContent className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 p-3">
+        <div className="flex flex-col gap-2">
+          <ProductImage
+            src={item.producto.imagen}
+            alt={item.producto.nombre}
+            className="aspect-square w-full rounded-xl border bg-white"
+          />
+
+          <div className="flex items-center justify-between rounded-full border bg-muted/30 p-0.5">
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="rounded-full"
+              onClick={() => actualizarCantidad(item.id, item.cantidad - 1)}
+              disabled={item.cantidad <= 1}
+              aria-label="Restar cantidad"
+            >
+              <Minus />
+            </Button>
+            <span className="min-w-5 text-center text-sm font-bold">
+              {item.cantidad}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="rounded-full"
+              onClick={() => actualizarCantidad(item.id, item.cantidad + 1)}
+              aria-label="Sumar cantidad"
+            >
+              <Plus />
+            </Button>
+          </div>
+        </div>
 
         <div className="min-w-0">
           <div className="flex items-start justify-between gap-2">
@@ -35,21 +62,21 @@ export function CartItemRow({ item }: CartItemRowProps) {
               variant="ghost"
               size="icon-sm"
               onClick={() => eliminarItem(item.id)}
-              aria-label={`Eliminar ${item.producto.nombre}`}
+              aria-label={"Eliminar " + item.producto.nombre}
               className="shrink-0 text-muted-foreground hover:text-destructive"
             >
               <Trash2 />
             </Button>
           </div>
 
-          <p className="mt-1 text-xs leading-5 text-muted-foreground">
+          <p className="mt-1 text-xs leading-4 text-muted-foreground">
             {item.resumenSeleccion.medidaEtiqueta} ·{" "}
             {item.resumenSeleccion.colorEtiqueta} ·{" "}
             {item.resumenSeleccion.vidrioEtiqueta ?? "Sin vidrio"}
           </p>
 
           {item.resumenSeleccion.accesoriosEtiqueta.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1">
+            <div className="mt-1.5 flex flex-wrap gap-1">
               {item.resumenSeleccion.accesoriosEtiqueta.map((label) => (
                 <Badge key={label} variant="secondary">
                   + {label}
@@ -58,37 +85,17 @@ export function CartItemRow({ item }: CartItemRowProps) {
             </div>
           )}
 
-          <div className="mt-3 flex flex-wrap items-end justify-between gap-3">
-            <div className="flex items-center gap-1 rounded-full border p-1">
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="rounded-full"
-                onClick={() => actualizarCantidad(item.id, item.cantidad - 1)}
-                disabled={item.cantidad <= 1}
-                aria-label="Restar cantidad"
-              >
-                <Minus />
-              </Button>
-              <span className="w-7 text-center text-sm font-bold">
-                {item.cantidad}
-              </span>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="rounded-full"
-                onClick={() => actualizarCantidad(item.id, item.cantidad + 1)}
-                aria-label="Sumar cantidad"
-              >
-                <Plus />
-              </Button>
-            </div>
-            <div className="text-right text-xs">
-              <p className="font-bold text-success">
-                {formatProductPrice(item.precios.totalContado)} contado
+          <div className="mt-3 grid grid-cols-2 gap-2 border-t pt-2.5">
+            <div>
+              <p className="text-xs text-muted-foreground">Precio contado</p>
+              <p className="mt-0.5 text-sm font-bold leading-tight tabular-nums text-success">
+                {formatProductPrice(item.precios.totalContado)}
               </p>
-              <p className="text-muted-foreground">
-                {formatProductPrice(item.precios.totalTarjeta)} tarjeta
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">Precio tarjeta</p>
+              <p className="mt-0.5 text-sm font-bold leading-tight tabular-nums">
+                {formatProductPrice(item.precios.totalTarjeta)}
               </p>
             </div>
           </div>
