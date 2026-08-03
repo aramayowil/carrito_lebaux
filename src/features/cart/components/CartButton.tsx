@@ -26,7 +26,7 @@ export function CartButton() {
         aria-label={
           count > 0 ? `Abrir carrito, ${count} unidades` : "Abrir carrito"
         }
-        className="relative size-14 rounded-full border-primary bg-clip-border shadow-xl transition-transform hover:scale-105 hover:border-primary/80"
+        className="relative size-14 rounded-full border-primary bg-clip-border shadow-xl transition-[transform,background-color,box-shadow,border-color] duration-200 hover:scale-105 hover:border-primary hover:bg-primary hover:shadow-2xl active:scale-95 active:shadow-lg"
       >
         <ShoppingCart className="size-6" />
         {count > 0 && (

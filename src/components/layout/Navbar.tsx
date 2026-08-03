@@ -43,7 +43,7 @@ export function Navbar() {
           <DesktopCatalogNavigation />
           <Button
             variant="whatsapp"
-            size="sm"
+            size="lg"
             className="ml-3 rounded-full"
             render={
               <a href={whatsappHref} target="_blank" rel="noreferrer">

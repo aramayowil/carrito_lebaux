@@ -1,21 +1,17 @@
 import { Link } from "react-router-dom"
 
-import logo from "@/assets/logo.png"
 import { configuracionSitio } from "@/data/mock"
 import { cn } from "@/lib/utils"
 
 interface LogoProps {
   className?: string
+  variant?: "full" | "cropped"
 }
 
-/**
- * Logo de Lebaux, clickeable (funciona como "Inicio"). El proyecto anterior
- * tenía dos variantes de imagen (`full` con wordmark / `icon` solo isotipo,
- * para mobile). Por ahora usamos un único asset (`src/assets/logo.png`,
- * ya presente en el proyecto) hasta contar con el recorte "solo ícono" —
- * ver docs/2026-08-02-migracion-home.md.
- */
-export function Logo({ className }: LogoProps) {
+/** Logo de Lebaux enlazado al inicio, con variantes para cabecera y pie. */
+export function Logo({ className, variant = "full" }: LogoProps) {
+  const isCropped = variant === "cropped"
+
   return (
     <Link
       to="/"
@@ -23,9 +19,12 @@ export function Logo({ className }: LogoProps) {
       aria-label={configuracionSitio.nombre}
     >
       <img
-        src={logo}
+        src={isCropped ? "/logo_recortado.png" : "/logo.png"}
         alt={configuracionSitio.nombre}
-        className="h-8 w-auto md:h-9"
+        className={cn(
+          "w-auto object-contain",
+          isCropped ? "h-20" : "h-8 md:h-9",
+        )}
         loading="eager"
         decoding="async"
       />

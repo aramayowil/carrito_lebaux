@@ -24,7 +24,7 @@ export function Footer() {
     <footer className="bg-brand-black text-white">
       <div className="container grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo className="mb-6" />
+          <Logo variant="cropped" className="mb-6" />
           <p className="mb-6 max-w-xs text-sm leading-7 text-white/60">
             {configuracionSitio.descripcion}
           </p>
