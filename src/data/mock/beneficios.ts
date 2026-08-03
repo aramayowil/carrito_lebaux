@@ -1,29 +1,35 @@
 import type { Beneficio } from "@/types"
 
 /**
- * Grilla "Por qué Lebaux" de la home. Portado de
- * carrito_responsive_actualizado (docs/2026-08-02-migracion-home.md).
+ * Ventajas concretas del proceso de compra y fabricación mostradas en la Home.
  */
 export const beneficios: Beneficio[] = [
   {
-    id: "beneficio-1",
-    icono: "Factory",
-    titulo: "Fabricación propia",
+    id: "beneficio-medida",
+    icono: "Ruler",
+    titulo: "Fabricación a medida",
     descripcion:
-      "Controlamos todo el proceso para garantizar calidad, terminaciones impecables y productos hechos para durar.",
+      "Fabricamos cada abertura según tu proyecto, con opciones para resolver distintos espacios y necesidades.",
   },
   {
-    id: "beneficio-2",
-    icono: "Truck",
-    titulo: "Envíos a todo el país",
+    id: "beneficio-configuracion",
+    icono: "SlidersHorizontal",
+    titulo: "Configuración completa",
     descripcion:
-      "Llegamos a todo el país y coordinamos la entrega para que recibas tu pedido sin complicaciones.",
+      "Elegí línea, medida, color, vidrio y accesorios desde el catálogo, sin perder de vista cada detalle.",
   },
   {
-    id: "beneficio-3",
-    icono: "Zap",
-    titulo: "Entregas rápidas",
+    id: "beneficio-precios",
+    icono: "BadgeDollarSign",
+    titulo: "Precios claros",
     descripcion:
-      "Producimos en tiempos cortos para que puedas avanzar con tu obra o proyecto sin largas esperas.",
+      "Consultá los valores de contado y tarjeta mientras configurás el producto, antes de enviar tu pedido.",
+  },
+  {
+    id: "beneficio-atencion",
+    icono: "MessageCircle",
+    titulo: "Atención directa",
+    descripcion:
+      "Enviá tu selección por WhatsApp y continuá la conversación con nuestro equipo para cerrar cada detalle.",
   },
 ]

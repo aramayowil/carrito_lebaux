@@ -12,7 +12,8 @@
  * beneficio. Unión cerrada a propósito: evita pasar un string cualquiera
  * que no exista como ícono y romper el render en runtime.
  */
-export type IconoBeneficio = "Factory" | "Truck" | "Zap";
+export type IconoBeneficio =
+  "Ruler" | "SlidersHorizontal" | "BadgeDollarSign" | "MessageCircle"
 
 /**
  * Caso de éxito / testimonio para la sección "Obras realizadas".
@@ -27,28 +28,27 @@ export type IconoBeneficio = "Factory" | "Truck" | "Zap";
  * };
  */
 export interface Obra {
-  id: string;
-  titulo: string;
-  imagen: string;
-  testimonio: string;
-  autor: string;
+  id: string
+  titulo: string
+  imagen: string
+  testimonio: string
+  autor: string
 }
 
 /**
- * Ítem de la grilla de "por qué elegirnos" (fabricación propia, envíos,
- * entrega rápida, etc.).
+ * Ítem de la grilla de ventajas del proceso de compra y fabricación.
  *
  * @example
  * const beneficio: Beneficio = {
- *   id: "beneficio-fabrica-propia",
- *   icono: "Factory",
- *   titulo: "Fabricación propia",
- *   descripcion: "Controlamos cada etapa del proceso, de la extrusión al armado final.",
+ *   id: "beneficio-medida",
+ *   icono: "Ruler",
+ *   titulo: "Fabricación a medida",
+ *   descripcion: "Fabricamos cada abertura según las necesidades del proyecto.",
  * };
  */
 export interface Beneficio {
-  id: string;
-  icono: IconoBeneficio;
-  titulo: string;
-  descripcion: string;
+  id: string
+  icono: IconoBeneficio
+  titulo: string
+  descripcion: string
 }
