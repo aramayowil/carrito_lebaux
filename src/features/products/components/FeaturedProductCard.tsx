@@ -1,4 +1,5 @@
 import { Star } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { ProductImage } from "@/components/media/ProductImage"
 import { Badge } from "@/components/ui/badge"
@@ -12,12 +13,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  buildProductInquiryMessage,
   formatAvailableSizes,
   formatProductPrice,
   getPrimaryProductImage,
 } from "@/features/products/lib/product-card-formatters"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import type { Producto } from "@/types"
 
 interface FeaturedProductCardProps {
@@ -28,7 +27,6 @@ interface FeaturedProductCardProps {
 export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
   const primaryImage = getPrimaryProductImage(product)
   const { precios } = product
-  const inquiryHref = buildWhatsAppUrl(buildProductInquiryMessage(product))
 
   return (
     <Card className="group grid h-full gap-0 overflow-hidden border border-primary/30 py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:grid-cols-2">
@@ -95,11 +93,7 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
           <Button
             size="lg"
             className="w-full sm:w-fit"
-            render={
-              <a href={inquiryHref} target="_blank" rel="noreferrer">
-                Consultar este producto
-              </a>
-            }
+            render={<Link to={`/producto/`}>Ver opciones</Link>}
           />
         </CardFooter>
       </div>

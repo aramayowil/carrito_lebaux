@@ -25,7 +25,7 @@ import type {
   SlugColorPerfil,
   SlugLineaProducto,
   SlugOpcionVidrio,
-} from "./catalogo";
+} from "./catalogo"
 
 /* --------------------------------------------------------------------------
  * Selección del cliente
@@ -53,17 +53,25 @@ import type {
  * };
  */
 export interface SeleccionProducto {
-  medidaId: string;
-  colorSlug: SlugColorPerfil;
+  medidaId: string
+  colorSlug: SlugColorPerfil
 
   /**
    * null cuando el producto no lleva vidrio,
    * por ejemplo una puerta completamente ciega.
    */
-  vidrioSlug: SlugOpcionVidrio | null;
+  vidrioSlug: SlugOpcionVidrio | null
 
   /** Accesorios elegidos por el cliente. */
-  accesoriosSlug: SlugAccesorio[];
+  accesoriosSlug: SlugAccesorio[]
+}
+
+/** Etiquetas legibles congeladas junto al item para renderizar el carrito sin rehidratar el catálogo. */
+export interface ResumenSeleccionCarrito {
+  medidaEtiqueta: string
+  colorEtiqueta: string
+  vidrioEtiqueta: string | null
+  accesoriosEtiqueta: string[]
 }
 
 /* --------------------------------------------------------------------------
@@ -91,23 +99,23 @@ export interface SeleccionProducto {
  * };
  */
 export interface DesglosePrecio {
-  moneda: CodigoMoneda;
+  moneda: CodigoMoneda
 
-  precioBase: number;
-  adicionalMedida: number;
-  adicionalColor: number;
-  adicionalVidrio: number;
-  adicionalAccesorios: number;
+  precioBase: number
+  adicionalMedida: number
+  adicionalColor: number
+  adicionalVidrio: number
+  adicionalAccesorios: number
 
-  porcentajeDescuento: number;
+  porcentajeDescuento: number
 
-  precioUnitarioContado: number;
-  precioUnitarioTarjeta: number;
+  precioUnitarioContado: number
+  precioUnitarioTarjeta: number
 
   /** precioUnitarioContado * cantidad */
-  totalContado: number;
+  totalContado: number
   /** precioUnitarioTarjeta * cantidad */
-  totalTarjeta: number;
+  totalTarjeta: number
 }
 
 /* --------------------------------------------------------------------------
@@ -129,12 +137,12 @@ export interface DesglosePrecio {
  * };
  */
 export interface ResumenProductoCarrito {
-  id: string;
-  slug: string;
-  nombre: string;
-  linea: SlugLineaProducto;
-  categoria: CategoriaProducto;
-  imagen: string;
+  id: string
+  slug: string
+  nombre: string
+  linea: SlugLineaProducto
+  categoria: CategoriaProducto
+  imagen: string
 }
 
 /* --------------------------------------------------------------------------
@@ -182,9 +190,10 @@ export interface ResumenProductoCarrito {
  * como archivo TS ejecutable/importable para tests o storybook).
  */
 export interface ItemCarrito {
-  id: string;
-  producto: ResumenProductoCarrito;
-  seleccion: SeleccionProducto;
-  cantidad: number;
-  precios: DesglosePrecio;
+  id: string
+  producto: ResumenProductoCarrito
+  seleccion: SeleccionProducto
+  resumenSeleccion: ResumenSeleccionCarrito
+  cantidad: number
+  precios: DesglosePrecio
 }

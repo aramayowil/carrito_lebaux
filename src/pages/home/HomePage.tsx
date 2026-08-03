@@ -4,21 +4,19 @@ import { ObrasSection } from "@/pages/home/sections/ObrasSection"
 import { AboutSection } from "@/pages/home/sections/AboutSection"
 import { HomeProductsSection } from "@/pages/home/sections/HomeProductsSection"
 import { obras, productosHome } from "@/data/mock"
+import { useDocumentMeta } from "@/hooks/use-document-meta"
 
 /**
- * Home. Primera pasada de migración desde carrito_responsive_actualizado
- * (ver docs/2026-08-02-migracion-home.md): Hero, Benefits, ObrasSection y
- * AboutSection, dentro de RootLayout (Navbar + Outlet + Footer).
- *
- * Hero ocupa exactamente el alto visible debajo del Navbar fijo
- * (`calc(100svh - var(--spacing-navbar))`, ver Hero.tsx) en todos los
- * dispositivos; Benefits sigue inmediatamente después en el flujo normal.
- *
- * Las cards de ofertas y destacados ya viven en features/products y se
- * componen en HomeProductsSection. Tanto `productosHome` como `obras`
- * vienen de data/mock hasta que se conecte un repositorio de catálogo.
+ * Compone la portada responsive con contenido institucional y una selección
+ * del catálogo mock; la lógica de producto permanece en features/products.
  */
 export function HomePage() {
+  useDocumentMeta({
+    title: "Puertas y ventanas de aluminio a medida",
+    description:
+      "Fábrica de aberturas de aluminio a medida en Tucumán. Líneas Herrero y Módena.",
+  })
+
   return (
     <>
       <Hero />

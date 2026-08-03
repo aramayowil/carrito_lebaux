@@ -3,20 +3,35 @@ import { createBrowserRouter } from "react-router-dom"
 import { RootLayout } from "@/components/layout/RootLayout"
 import { HomePage } from "@/pages/home/HomePage"
 import { NotFoundPage } from "@/pages/not-found/NotFoundPage"
+import type { SlugLineaProducto } from "@/types"
 
-/**
- * Rutas de la app. RootLayout es la layout route (Header/Footer fijos,
- * el contenido de cada página se renderiza en su <Outlet />).
- *
- * Al migrar features reales, cada página nueva se agrega acá como child
- * route apuntando a src/pages/<pagina>/<Pagina>Page.tsx.
- */
+function lazyCatalogLine(line: SlugLineaProducto) {
+  return async () => {
+    const { CatalogLinePage } = await import("@/pages/catalog/CatalogLinePage")
+    return {
+      Component: function CatalogLineRoute() {
+        return <CatalogLinePage line={line} />
+      },
+    }
+  }
+}
+
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: "modena", lazy: lazyCatalogLine("modena") },
+      { path: "herrero", lazy: lazyCatalogLine("herrero") },
+      {
+        path: "producto/:slug",
+        lazy: async () => {
+          const { ProductDetailPage } =
+            await import("@/pages/product/ProductDetailPage")
+          return { Component: ProductDetailPage }
+        },
+      },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

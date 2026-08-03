@@ -21,7 +21,3 @@ export function getPrimaryProductImage(
     product.imagenes.find((image) => image.esPrincipal) ?? product.imagenes[0]
   )
 }
-
-export function buildProductInquiryMessage(product: Producto): string {
-  return `Hola! Vi ${product.nombre} en la página web y quiero consultar por este producto.`
-}

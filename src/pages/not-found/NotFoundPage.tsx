@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
+import { useDocumentMeta } from "@/hooks/use-document-meta"
 
 export function NotFoundPage() {
+  useDocumentMeta({ title: "Página no encontrada" })
+
   return (
-    <div className="flex flex-col items-center gap-4 py-20 text-center">
+    <div className="container flex min-h-[60dvh] flex-col items-center gap-4 py-20 text-center">
       <h1 className="text-3xl font-semibold text-foreground">404</h1>
       <p className="text-muted-foreground">No encontramos esta página.</p>
       <Button render={<Link to="/" />}>Volver al inicio</Button>

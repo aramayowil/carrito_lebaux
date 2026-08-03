@@ -1,4 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { ProductImage } from "@/components/media/ProductImage"
 import { Badge } from "@/components/ui/badge"
@@ -12,11 +13,9 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  buildProductInquiryMessage,
   formatProductPrice,
   getPrimaryProductImage,
 } from "@/features/products/lib/product-card-formatters"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
 import type { Producto } from "@/types"
 
 interface PromotionProductCardProps {
@@ -28,7 +27,6 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
   const primaryImage = getPrimaryProductImage(product)
   const { precios } = product
   const lineLabel = product.linea === "modena" ? "Módena" : "Herrero"
-  const inquiryHref = buildWhatsAppUrl(buildProductInquiryMessage(product))
 
   return (
     <Card className="group h-full gap-0 overflow-hidden border border-primary/20 bg-linear-to-br from-card via-card to-accent/35 py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -94,10 +92,10 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
           size="lg"
           className="w-full rounded-full"
           render={
-            <a href={inquiryHref} target="_blank" rel="noreferrer">
-              Consultar oferta
+            <Link to={`/producto/`}>
+              Ver oferta
               <ArrowRight data-icon="inline-end" />
-            </a>
+            </Link>
           }
         />
       </CardFooter>

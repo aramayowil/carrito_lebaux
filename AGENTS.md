@@ -94,23 +94,22 @@ src/
 
 - [x] Paleta de colores definida (logo → ámbar/gris + semánticos).
 - [x] Estructura de carpetas Screaming Architecture.
-- [x] Layout genérico de prueba (Header/Footer/RootLayout + HomePage de test).
+- [x] Layout de aplicación completo (Navbar/Footer/RootLayout + HomePage).
 - [x] Router (`react-router-dom` v7, `src/routes/router.tsx`).
 - [x] Tipos globales del catálogo/carrito/sitio en `src/types` (ver
       `docs/2026-08-02-tipos-globales.md`).
-- [x] Migración parcial de Header/Footer/Home (Hero, Benefits, Obras,
-      About) desde `carrito_responsive_actualizado`, ver
-      `docs/2026-08-02-migracion-home.md`. Header simplificado (sin
-      mega-menú ni drawer mobile todavía), Footer sin columna de
-      categorías — quedan para cuando se migre `features/products`.
-- [x] Componentes `sheet`, `card`, `carousel`, `skeleton` y `badge` de shadcn
-      instalados mediante la CLI.
+- [x] Navbar, Footer y Home completos (Hero, Benefits, productos, Obras y
+      About) desde `carrito_responsive_actualizado`; navegación de catálogo
+      responsive incluida (ver `docs/2026-08-02-migracion-home.md`).
+- [x] Primitivos de shadcn requeridos instalados mediante la CLI y verificados
+      contra el registro oficial con `shadcn diff`.
 - [x] Cards de ofertas y destacados de la Home migradas a
       `features/products` (ver `docs/2026-08-03-migracion-cards-home.md`).
-- [ ] Conectar el menú mobile del Header con el `sheet` ya instalado.
-- [ ] Completar `features/products`: líneas, categorías, páginas de catálogo,
-      detalle y configurador desde `carrito_responsive_actualizado`.
-- [ ] Store del carrito (Zustand) en `features/cart/store`.
+- [x] `features/products` completo: líneas, categorías, filtros, catálogo,
+      detalle y configurador (ver
+      `docs/2026-08-03-migracion-catalogo-carrito-checkout.md`).
+- [x] Carrito persistente con Zustand y checkout por WhatsApp en
+      `features/cart` y `features/checkout`.
 - [ ] Conexión a datos reales (hoy `data/mock`).
 
 Cuando se complete un ítem o se agregue uno nuevo, actualizar esta lista y sumar

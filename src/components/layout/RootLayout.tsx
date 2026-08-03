@@ -1,36 +1,33 @@
 import { Outlet } from "react-router-dom"
 
-import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
+import { Navbar } from "@/components/layout/Navbar"
+import { ScrollToTop } from "@/components/layout/ScrollToTop"
+import { CartButton } from "@/features/cart/components/CartButton"
+import { CartDrawer } from "@/features/cart/components/CartDrawer"
+import { CheckoutDialog } from "@/features/checkout/components/CheckoutDialog"
+import { OrderSuccessDialog } from "@/features/checkout/components/OrderSuccessDialog"
 
-/**
- * Layout de la app: Navbar (fijo) + contenido de la ruta activa (Outlet) +
- * Footer. Se usa como layout route en src/routes/router.tsx, envolviendo
- * todas las páginas.
- *
- * `main` NO tiene max-width ni padding horizontal propios: cada
- * página/sección decide su propio ancho (full-bleed para secciones con
- * fondo de marca como el Hero, o la utilidad `.container` de
- * src/index.css para contenido centrado). Esto permite que una misma
- * página combine secciones de ancho completo con secciones acotadas, en
- * vez de forzar un único ancho para toda la app.
- *
- * `pt-navbar` sí es necesario: compensa la altura del Navbar, que es
- * `fixed` (sale del flujo normal, así que sin este padding el contenido
- * de cada página quedaría tapado detrás). `--spacing-navbar` se define
- * una sola vez en src/index.css (registrada en la escala de spacing de
- * Tailwind) y la usan tanto Navbar (su propio alto, `h-navbar`) como Hero
- * (`min-height: calc(100svh - var(--spacing-navbar))`, para ocupar
- * exactamente el espacio visible debajo del navbar).
- */
+/** Shell global: navegación, ruta activa, footer y flujo persistente del carrito. */
 export function RootLayout() {
   return (
     <div className="flex min-h-svh flex-col bg-background text-foreground">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Saltar al contenido
+      </a>
+      <ScrollToTop />
       <Navbar />
-      <main className="flex-1 pt-navbar">
+      <main id="main-content" className="flex-1 pt-navbar">
         <Outlet />
       </main>
       <Footer />
+      <CartButton />
+      <CartDrawer />
+      <CheckoutDialog />
+      <OrderSuccessDialog />
     </div>
   )
 }

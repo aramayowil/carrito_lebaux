@@ -7,7 +7,7 @@
  * archivo deja de compilar y avisa que hay que actualizar el ejemplo.
  */
 
-import type { ItemCarrito } from "./carrito";
+import type { ItemCarrito } from "./carrito"
 
 export const ejemploItemCarrito: ItemCarrito = {
   id: "item-001",
@@ -25,6 +25,12 @@ export const ejemploItemCarrito: ItemCarrito = {
     vidrioSlug: "comun-4mm",
     accesoriosSlug: ["mosquitero", "tapajunta"],
   },
+  resumenSeleccion: {
+    medidaEtiqueta: "120 x 100 cm",
+    colorEtiqueta: "Negro",
+    vidrioEtiqueta: "Vidrio común 4 mm",
+    accesoriosEtiqueta: ["Mosquitero", "Tapajunta"],
+  },
   cantidad: 1,
   precios: {
     moneda: "ARS",
@@ -39,4 +45,4 @@ export const ejemploItemCarrito: ItemCarrito = {
     totalContado: 133000,
     totalTarjeta: 172900,
   },
-};
+}

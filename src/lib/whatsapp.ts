@@ -1,15 +1,11 @@
 import { configuracionSitio } from "@/data/mock"
 
 /**
- * Helpers de WhatsApp. Portado de carrito_responsive_actualizado, recortado
- * a lo que usa el Header por ahora (ver docs/2026-08-02-migracion-home.md).
- * Las funciones que arman el mensaje de un pedido/presupuesto de un
- * producto puntual (buildQuoteMessage, buildOrderMessage) se migran junto
- * con features/cart y features/checkout, cuando exista ItemCarrito real
- * en el store.
+ * Construcción genérica de enlaces de contacto. Los mensajes propios de cada
+ * flujo viven en features/products y features/checkout.
  */
 
-/** Mensaje por defecto del botón "Pedir presupuesto" del Header. */
+/** Mensaje por defecto de las llamadas a la acción de contacto. */
 export const DEFAULT_WHATSAPP_MESSAGE =
   "Hola! Vi la página web y quiero consultar por un presupuesto."
 

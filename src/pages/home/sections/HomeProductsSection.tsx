@@ -1,3 +1,7 @@
+import { ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
+
+import { Button } from "@/components/ui/button"
 import {
   Carousel,
   CarouselContent,
@@ -91,6 +95,19 @@ export function HomeProductsSection({ products }: HomeProductsSectionProps) {
               {featured.map((product) => (
                 <FeaturedProductCard key={product.id} product={product} />
               ))}
+            </div>
+
+            <div className="mt-12 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button size="lg" render={<Link to="/modena" />}>
+                Ver catálogo Módena <ArrowRight data-icon="inline-end" />
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                render={<Link to="/herrero" />}
+              >
+                Ver catálogo Herrero <ArrowRight data-icon="inline-end" />
+              </Button>
             </div>
           </div>
         </section>
