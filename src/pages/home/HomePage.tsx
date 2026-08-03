@@ -2,7 +2,8 @@ import { Hero } from "@/pages/home/sections/Hero"
 import { Benefits } from "@/pages/home/sections/Benefits"
 import { ObrasSection } from "@/pages/home/sections/ObrasSection"
 import { AboutSection } from "@/pages/home/sections/AboutSection"
-import { obras } from "@/data/mock"
+import { HomeProductsSection } from "@/pages/home/sections/HomeProductsSection"
+import { obras, productosHome } from "@/data/mock"
 
 /**
  * Home. Primera pasada de migración desde carrito_responsive_actualizado
@@ -13,21 +14,16 @@ import { obras } from "@/data/mock"
  * (`calc(100svh - var(--spacing-navbar))`, ver Hero.tsx) en todos los
  * dispositivos; Benefits sigue inmediatamente después en el flujo normal.
  *
- * Deliberadamente NO migrado todavía en esta pasada (queda para cuando
- * exista features/products con datos reales):
- *   - Carrusel de productos en oferta.
- *   - Sección "Destacados" con FeaturedProductCard.
- *   - Botones de acceso al catálogo completo por línea.
- *
- * `obras` viene de data/mock por ahora; cuando exista features/products
- * con su propio store/servicio, esto se reemplaza por ese hook (como hacía
- * useCatalog en el proyecto anterior) en vez de importar el mock directo.
+ * Las cards de ofertas y destacados ya viven en features/products y se
+ * componen en HomeProductsSection. Tanto `productosHome` como `obras`
+ * vienen de data/mock hasta que se conecte un repositorio de catálogo.
  */
 export function HomePage() {
   return (
     <>
       <Hero />
       <Benefits />
+      <HomeProductsSection products={productosHome} />
       <ObrasSection obras={obras} />
       <AboutSection />
     </>

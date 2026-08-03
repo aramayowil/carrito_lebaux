@@ -103,11 +103,13 @@ src/
       `docs/2026-08-02-migracion-home.md`. Header simplificado (sin
       mega-menú ni drawer mobile todavía), Footer sin columna de
       categorías — quedan para cuando se migre `features/products`.
-- [ ] Instalar componente `sheet` de shadcn (bloqueado por falta de acceso
-      de red a `ui.shadcn.com` en este entorno — correr
-      `npx shadcn@latest add sheet` manualmente) y conectar el menú mobile.
-- [ ] Migración de `features/products` (líneas, categorías, tipologías,
-      cards de producto de la home) desde `carrito_responsive_actualizado`.
+- [x] Componentes `sheet`, `card`, `carousel`, `skeleton` y `badge` de shadcn
+      instalados mediante la CLI.
+- [x] Cards de ofertas y destacados de la Home migradas a
+      `features/products` (ver `docs/2026-08-03-migracion-cards-home.md`).
+- [ ] Conectar el menú mobile del Header con el `sheet` ya instalado.
+- [ ] Completar `features/products`: líneas, categorías, páginas de catálogo,
+      detalle y configurador desde `carrito_responsive_actualizado`.
 - [ ] Store del carrito (Zustand) en `features/cart/store`.
 - [ ] Conexión a datos reales (hoy `data/mock`).
 
