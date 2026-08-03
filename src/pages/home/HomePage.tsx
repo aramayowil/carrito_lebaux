@@ -7,7 +7,11 @@ import { obras } from "@/data/mock"
 /**
  * Home. Primera pasada de migración desde carrito_responsive_actualizado
  * (ver docs/2026-08-02-migracion-home.md): Hero, Benefits, ObrasSection y
- * AboutSection.
+ * AboutSection, dentro de RootLayout (Navbar + Outlet + Footer).
+ *
+ * Hero ocupa exactamente el alto visible debajo del Navbar fijo
+ * (`calc(100svh - var(--spacing-navbar))`, ver Hero.tsx) en todos los
+ * dispositivos; Benefits sigue inmediatamente después en el flujo normal.
  *
  * Deliberadamente NO migrado todavía en esta pasada (queda para cuando
  * exista features/products con datos reales):

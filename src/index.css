@@ -57,6 +57,18 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Alto del Navbar (fijo, `position: fixed`, ver Navbar.tsx). Única fuente
+     de verdad para esta medida: la usan RootLayout (padding-top de `main`,
+     para no tapar contenido detrás del navbar fijo) y Hero (para que su
+     `min-height` sea exactamente el alto visible debajo del navbar,
+     `calc(100svh - var(--spacing-navbar))`, en vez de 100dvh a secas —
+     eso último se sumaría al alto del navbar y generaría más scroll del
+     necesario). Registrada en la escala de spacing de Tailwind (en vez de
+     en `:root` a secas) para poder consumirla como `h-navbar` / `pt-navbar`
+     sin sintaxis arbitraria; donde hace falta `calc()` (Hero) se sigue
+     usando `var(--spacing-navbar)` arbitrario. */
+  --spacing-navbar: 5rem; /* 80px, = h-20 */
 }
 
 :root {
@@ -70,20 +82,26 @@
 
   /* brand — amber, from logo */
   --primary: oklch(0.789 0.148 70.872); /* amber-500 #F5A83D */
-  --primary-foreground: oklch(0.25 0.004 228.938); /* gray-900, reads better than white on amber */
+  --primary-foreground: oklch(
+    0.25 0.004 228.938
+  ); /* gray-900, reads better than white on amber */
 
   /* neutral — gray, from logo */
   --secondary: oklch(0.933 0.001 197.14); /* gray-100 #E8E9E9 */
   --secondary-foreground: oklch(0.25 0.004 228.938);
   --muted: oklch(0.933 0.001 197.14); /* gray-100 */
   --muted-foreground: oklch(0.496 0.005 214.347); /* gray-700 #5F6364 */
-  --accent: oklch(0.948 0.049 85.149); /* amber-100 #FDECC9, for hover/highlight rows */
+  --accent: oklch(
+    0.948 0.049 85.149
+  ); /* amber-100 #FDECC9, for hover/highlight rows */
   --accent-foreground: oklch(0.412 0.087 64.133); /* amber-900 #6B3F0A */
 
   /* semantic */
   --destructive: oklch(0.577 0.215 27.325); /* red #DC2626, sin stock / error */
   --destructive-foreground: oklch(1 0 0);
-  --success: oklch(0.627 0.17 149.214); /* green #16A34A, en stock / confirmado */
+  --success: oklch(
+    0.627 0.17 149.214
+  ); /* green #16A34A, en stock / confirmado */
   --success-foreground: oklch(1 0 0);
   --warning: oklch(0.666 0.157 58.318); /* orange #D97706, advertencia */
   --warning-foreground: oklch(1 0 0);
@@ -93,7 +111,9 @@
   /* Color fijo de marca de WhatsApp (#25D366), no del logo Lebaux. Se
      mantiene aparte de la paleta ámbar/gris porque el CTA de WhatsApp
      necesita ser reconocible como "ese botón verde" en cualquier tema. */
-  --whatsapp: oklch(0.761 0.201 149.74); /* #25D366, verde oficial de WhatsApp */
+  --whatsapp: oklch(
+    0.761 0.201 149.74
+  ); /* #25D366, verde oficial de WhatsApp */
   --whatsapp-foreground: oklch(1 0 0);
 
   /* Negros fijos de marca (Hero, Benefits, Footer, header). A propósito
@@ -102,7 +122,9 @@
      del sitio (igual que hacía el proyecto anterior con brand-black /
      brand-graphite). Ver docs/2026-08-02-migracion-home.md. */
   --brand-black: oklch(0.191 0 0); /* #141414, fondo del Hero/Header/Footer */
-  --brand-graphite: oklch(0.235 0 0); /* #1e1e1e, fondo de la sección Benefits */
+  --brand-graphite: oklch(
+    0.235 0 0
+  ); /* #1e1e1e, fondo de la sección Benefits */
 
   --border: oklch(0.933 0.001 197.14); /* gray-100 */
   --input: oklch(0.933 0.001 197.14);
@@ -144,7 +166,9 @@
   --accent: oklch(0.412 0.087 64.133); /* amber-900, hover/highlight */
   --accent-foreground: oklch(0.866 0.111 75.901); /* amber-300 */
 
-  --destructive: oklch(0.711 0.166 22.216); /* red-400, más suave para fondo oscuro */
+  --destructive: oklch(
+    0.711 0.166 22.216
+  ); /* red-400, más suave para fondo oscuro */
   --destructive-foreground: oklch(0.25 0.004 228.938);
   --success: oklch(0.8 0.182 151.711); /* green-400 */
   --success-foreground: oklch(0.25 0.004 228.938);
