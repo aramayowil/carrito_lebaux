@@ -10,6 +10,7 @@ import {
 } from "@/features/products/data/catalog-metadata"
 import { ProductGrid } from "@/features/products/components/ProductGrid"
 import { useDocumentMeta } from "@/hooks/use-document-meta"
+import { CatalogLineMoreContent } from "@/pages/catalog/sections/CatalogLineMoreContent"
 import { productos } from "@/data/mock"
 import type { CategoriaProducto, SlugLineaProducto } from "@/types"
 
@@ -119,6 +120,8 @@ export function CatalogLinePage({ line }: CatalogLinePageProps) {
         </div>
 
         <ProductGrid products={visibleProducts} />
+
+        <CatalogLineMoreContent line={line} />
       </div>
     </div>
   )
