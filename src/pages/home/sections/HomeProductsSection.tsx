@@ -77,7 +77,7 @@ export function HomeProductsSection({ products }: HomeProductsSectionProps) {
         <section
           id="productos"
           aria-labelledby="featured-title"
-          className="py-20"
+          className="scroll-mt-navbar py-20"
         >
           <div className="container">
             <p className="eyebrow mb-2 flex justify-center text-center">
@@ -97,17 +97,53 @@ export function HomeProductsSection({ products }: HomeProductsSectionProps) {
               ))}
             </div>
 
-            <div className="mt-12 flex flex-col justify-center gap-3 sm:flex-row">
-              <Button size="lg" render={<Link to="/modena" />}>
-                Ver catálogo Módena <ArrowRight data-icon="inline-end" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                render={<Link to="/herrero" />}
-              >
-                Ver catálogo Herrero <ArrowRight data-icon="inline-end" />
-              </Button>
+            <div className="mt-12 rounded-3xl border border-primary/20 bg-brand-graphite p-6 text-white shadow-xl sm:p-8">
+              <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+                <div>
+                  <p className="eyebrow mb-2">Catálogos completos</p>
+                  <h3 className="text-2xl font-bold uppercase tracking-tight">
+                    Todavía hay más para elegir
+                  </h3>
+                  <p className="mt-3 max-w-md text-sm leading-6 text-white/65">
+                    Recorré todos los modelos y encontrá la línea que mejor se
+                    adapte a tu proyecto.
+                  </p>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Button
+                    size="lg"
+                    className="h-auto min-h-18 w-full justify-between whitespace-normal px-5 py-4 text-left"
+                    render={<Link to="/modena" />}
+                  >
+                    <span className="min-w-0">
+                      <span className="block text-base font-semibold">
+                        Explorar Línea Módena
+                      </span>
+                      <span className="mt-1 block text-xs font-normal text-primary-foreground/70">
+                        Más opciones y terminaciones
+                      </span>
+                    </span>
+                    <ArrowRight className="size-5" aria-hidden="true" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="h-auto min-h-18 w-full justify-between whitespace-normal border-white/20 bg-white/5 px-5 py-4 text-left text-white hover:bg-white/10 hover:text-white"
+                    render={<Link to="/herrero" />}
+                  >
+                    <span className="min-w-0">
+                      <span className="block text-base font-semibold">
+                        Explorar Línea Herrero
+                      </span>
+                      <span className="mt-1 block text-xs font-normal text-white/60">
+                        Una solución práctica y resistente
+                      </span>
+                    </span>
+                    <ArrowRight className="size-5" aria-hidden="true" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>

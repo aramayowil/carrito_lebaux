@@ -48,7 +48,7 @@ export function Navbar() {
             render={
               <a href={whatsappHref} target="_blank" rel="noreferrer">
                 <WhatsAppIcon data-icon="inline-start" />
-                Pedir presupuesto
+                Pedí tu presupuesto
               </a>
             }
           />
