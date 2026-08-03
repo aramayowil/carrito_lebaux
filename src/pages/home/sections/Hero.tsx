@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
-import heroImage from "@/assets/hero.png"
+import heroImage from "@/assets/banners/bannerweb.png"
 
 /**
  * Sección principal (above the fold) de la home. Rediseño completo desde

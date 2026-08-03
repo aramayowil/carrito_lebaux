@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
 import {
   calcularTotalesCarrito,
@@ -23,6 +22,7 @@ import { useCartUIStore } from "@/features/cart/store/use-cart-ui-store"
 import { buildOrderMessage } from "@/features/checkout/lib/order-message"
 import type { FormaPago } from "@/features/checkout/types/checkout"
 import { formatProductPrice } from "@/features/products/lib/product-card-formatters"
+import { cn } from "@/lib/utils"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 
 /** Recoge los datos mínimos y genera el pedido final para WhatsApp. */
@@ -35,31 +35,21 @@ export function CheckoutDialog() {
   const totals = calcularTotalesCarrito(items)
 
   const [nombre, setNombre] = useState("")
-  const [localidad, setLocalidad] = useState("")
   const [formaPago, setFormaPago] = useState<FormaPago>("contado")
-  const [notas, setNotas] = useState("")
   const [submitted, setSubmitted] = useState(false)
 
   const nombreInvalid = submitted && nombre.trim().length < 2
-  const localidadInvalid = submitted && localidad.trim().length < 2
   const total =
     formaPago === "contado" ? totals.totalContado : totals.totalTarjeta
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitted(true)
-    if (
-      nombre.trim().length < 2 ||
-      localidad.trim().length < 2 ||
-      items.length === 0
-    )
-      return
+    if (nombre.trim().length < 2 || items.length === 0) return
 
     const message = buildOrderMessage(items, {
       nombre: nombre.trim(),
-      localidad: localidad.trim(),
       formaPago,
-      notas,
     })
     window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer")
     setOpen(false)
@@ -95,24 +85,6 @@ export function CheckoutDialog() {
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="checkout-location">Localidad o barrio</Label>
-            <Input
-              id="checkout-location"
-              value={localidad}
-              onChange={(event) => setLocalidad(event.target.value)}
-              placeholder="Nos ayuda a estimar el envío"
-              autoComplete="address-level2"
-              aria-invalid={localidadInvalid}
-              required
-            />
-            {localidadInvalid && (
-              <p className="text-xs text-destructive">
-                Ingresá tu localidad o barrio.
-              </p>
-            )}
-          </div>
-
           <fieldset className="space-y-3">
             <legend className="text-sm font-medium">
               Forma de pago preferida
@@ -120,45 +92,52 @@ export function CheckoutDialog() {
             <RadioGroup
               value={formaPago}
               onValueChange={(value) => setFormaPago(value as FormaPago)}
-              className="grid gap-2 sm:grid-cols-2"
+              className="grid gap-3 sm:grid-cols-2"
             >
               <Label
                 htmlFor="payment-cash"
-                className="flex cursor-pointer items-center gap-3 rounded-2xl border p-4 has-data-[checked]:border-primary has-data-[checked]:bg-accent"
+                className={cn(
+                  "flex min-h-20 cursor-pointer items-start gap-3 rounded-xl border bg-card p-4 transition-[border-color,background-color,box-shadow] has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/30",
+                  formaPago === "contado"
+                    ? "border-primary bg-accent shadow-sm ring-1 ring-primary/20"
+                    : "border-border hover:border-primary/50 hover:bg-muted/50",
+                )}
               >
-                <RadioGroupItem id="payment-cash" value="contado" />
-                <span>
+                <RadioGroupItem
+                  id="payment-cash"
+                  value="contado"
+                  className="mt-0.5"
+                />
+                <span className="space-y-1">
                   <span className="block font-medium">Contado</span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="block text-xs leading-relaxed text-muted-foreground">
                     Efectivo o transferencia
                   </span>
                 </span>
               </Label>
               <Label
                 htmlFor="payment-card"
-                className="flex cursor-pointer items-center gap-3 rounded-2xl border p-4 has-data-[checked]:border-primary has-data-[checked]:bg-accent"
+                className={cn(
+                  "flex min-h-20 cursor-pointer items-start gap-3 rounded-xl border bg-card p-4 transition-[border-color,background-color,box-shadow] has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/30",
+                  formaPago === "tarjeta"
+                    ? "border-primary bg-accent shadow-sm ring-1 ring-primary/20"
+                    : "border-border hover:border-primary/50 hover:bg-muted/50",
+                )}
               >
-                <RadioGroupItem id="payment-card" value="tarjeta" />
-                <span>
+                <RadioGroupItem
+                  id="payment-card"
+                  value="tarjeta"
+                  className="mt-0.5"
+                />
+                <span className="space-y-1">
                   <span className="block font-medium">Tarjeta</span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="block text-xs leading-relaxed text-muted-foreground">
                     Precio de lista
                   </span>
                 </span>
               </Label>
             </RadioGroup>
           </fieldset>
-
-          <div className="space-y-2">
-            <Label htmlFor="checkout-notes">Observaciones (opcional)</Label>
-            <Textarea
-              id="checkout-notes"
-              value={notas}
-              onChange={(event) => setNotas(event.target.value)}
-              placeholder="Ej: necesito coordinar entrega en obra"
-              rows={3}
-            />
-          </div>
 
           <Separator />
 

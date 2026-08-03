@@ -12,7 +12,6 @@ export function buildOrderMessage(
     "Hola Lebaux! Quiero enviar este pedido:",
     "",
     `Cliente: ${customer.nombre}`,
-    `Localidad / barrio: ${customer.localidad}`,
     `Forma de pago: ${paymentLabel}`,
     "",
     `--- Pedido (${items.length} ${items.length === 1 ? "producto" : "productos"}) ---`,
@@ -45,8 +44,6 @@ export function buildOrderMessage(
     "",
     `Total estimado (${paymentLabel}): ${formatProductPrice(total)}`,
   )
-  if (customer.notas.trim())
-    lines.push("", `Observaciones: ${customer.notas.trim()}`)
 
   return lines.join("\n")
 }
