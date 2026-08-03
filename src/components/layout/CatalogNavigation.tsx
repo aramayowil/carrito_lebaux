@@ -104,17 +104,17 @@ export function MobileCatalogNavigation({
   onNavigate,
 }: MobileCatalogNavigationProps) {
   return (
-    <Accordion className="rounded-2xl border-white/10 bg-brand-graphite px-2 text-white">
+    <Accordion className="rounded-2xl border-white/10 bg-white/[0.04] text-white">
       {LINEAS_PRODUCTO.map((line) => (
         <AccordionItem
           key={line.slug}
           value={line.slug}
-          className="border-white/10 data-open:bg-white/5"
+          className="border-white/10 data-open:bg-transparent"
         >
-          <AccordionTrigger className="px-3 py-3 text-base text-white hover:no-underline **:data-[slot=accordion-trigger-icon]:text-primary">
+          <AccordionTrigger className="px-4 py-4 text-base font-semibold text-white hover:no-underline aria-expanded:text-primary **:data-[slot=accordion-trigger-icon]:text-primary">
             {line.nombre}
           </AccordionTrigger>
-          <AccordionContent className="space-y-1 px-1 [&_a]:no-underline">
+          <AccordionContent className="grid grid-cols-2 gap-2 px-0 [&_a]:no-underline [&_a]:hover:text-white">
             {categoriesForLine(line.slug).map((category) => {
               const metadata = CATEGORIAS_PRODUCTO[category]
               const Icon = metadata.icono
@@ -123,19 +123,19 @@ export function MobileCatalogNavigation({
                   key={category}
                   to={`/${line.slug}?categoria=${category}`}
                   onClick={onNavigate}
-                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-white/75 hover:bg-white/10 hover:text-white"
+                  className="flex min-h-14 items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-2.5 py-2 text-xs font-medium text-white/75 transition-colors hover:border-primary/30 hover:bg-primary/10"
                 >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                    <Icon className="size-4" aria-hidden="true" />
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <Icon className="size-3.5" aria-hidden="true" />
                   </span>
-                  {metadata.etiqueta}
+                  <span className="min-w-0 leading-4">{metadata.etiqueta}</span>
                 </Link>
               )
             })}
             <Link
               to={`/${line.slug}`}
               onClick={onNavigate}
-              className="group mt-1 flex items-center justify-between rounded-xl border border-white/10 px-3 py-3 text-white hover:text-primary"
+              className="group col-span-2 mt-1 flex items-center justify-between rounded-xl border border-primary/25 bg-primary/5 px-3 py-3 text-white transition-colors hover:bg-primary/10"
             >
               <span>
                 <span className="block text-[0.625rem] font-medium uppercase tracking-widest text-white/45">
@@ -145,7 +145,7 @@ export function MobileCatalogNavigation({
                   Ver todos los productos
                 </span>
               </span>
-              <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:translate-x-0.5">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:translate-x-0.5">
                 <ArrowRight className="size-4" aria-hidden="true" />
               </span>
             </Link>

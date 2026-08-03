@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Menu } from "lucide-react"
+import { House, Menu, X } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
 import {
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
@@ -62,7 +63,7 @@ export function Navbar() {
                   variant="ghost"
                   size="icon"
                   aria-label="Abrir menú de navegación"
-                  className="text-white hover:bg-white/10 hover:text-white"
+                  className="rounded-xl border border-white/10 bg-white/5 text-white hover:bg-primary/10 hover:text-primary"
                 />
               }
             >
@@ -70,35 +71,64 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-full max-w-sm gap-0 overflow-y-auto p-0"
+              showCloseButton={false}
+              className="w-[min(92vw,24rem)] max-w-none gap-0 border-l border-white/10 bg-brand-black p-0 text-white"
             >
               <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
-              <div className="border-b p-4">
+              <div className="flex h-navbar shrink-0 items-center justify-between border-b border-white/10 px-4">
                 <Logo />
-              </div>
-              <nav aria-label="Principal mobile" className="flex-1 p-3">
-                <NavLink
-                  to="/"
-                  end
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={({ isActive }) =>
-                    cn(
-                      "mb-1 block rounded-xl px-3 py-3 text-base font-medium hover:bg-muted",
-                      isActive && "bg-accent text-accent-foreground",
-                    )
+                <SheetClose
+                  render={
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-xl border border-white/10 bg-white/5 text-white hover:bg-primary/10 hover:text-primary"
+                      aria-label="Cerrar menú de navegación"
+                    />
                   }
                 >
-                  Inicio
-                </NavLink>
-                <MobileCatalogNavigation
-                  onNavigate={() => setMobileMenuOpen(false)}
-                />
+                  <X className="size-5" />
+                </SheetClose>
+              </div>
+              <nav
+                aria-label="Principal mobile"
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 [scrollbar-color:color-mix(in_oklch,var(--primary)_55%,transparent)_transparent] [scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb:hover]:bg-primary/70 [&::-webkit-scrollbar-track]:bg-transparent"
+              >
+                <div className="mb-6">
+                  <p className="mb-2 px-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-white/40">
+                    Navegación
+                  </p>
+                  <NavLink
+                    to="/"
+                    end
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center gap-3 rounded-xl border border-transparent px-3 py-3 text-sm font-medium text-white/75 hover:border-white/10 hover:bg-white/5 hover:text-white",
+                        isActive &&
+                          "border-primary/25 bg-primary/10 text-primary",
+                      )
+                    }
+                  >
+                    <House className="size-4" aria-hidden="true" />
+                    Inicio
+                  </NavLink>
+                </div>
+
+                <div>
+                  <p className="mb-2 px-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-white/40">
+                    Elegí una línea
+                  </p>
+                  <MobileCatalogNavigation
+                    onNavigate={() => setMobileMenuOpen(false)}
+                  />
+                </div>
               </nav>
-              <div className="border-t p-4">
+              <div className="shrink-0 border-t border-white/10 bg-brand-graphite/60 p-4">
                 <Button
                   variant="whatsapp"
                   size="lg"
-                  className="w-full rounded-full"
+                  className="w-full rounded-xl"
                   render={
                     <a
                       href={whatsappHref}
