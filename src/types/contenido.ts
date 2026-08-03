@@ -22,6 +22,8 @@ export type IconoBeneficio =
  * const obra: Obra = {
  *   id: "obra-001",
  *   titulo: "Ampliación de casa en San Miguel de Tucumán",
+ *   tipo: "Proyecto residencial",
+ *   especificacion: "Aberturas corredizas",
  *   imagen: "/img/obras/obra-001.jpg",
  *   testimonio: "El asesoramiento fue excelente y la instalación impecable.",
  *   autor: "Marcela G.",
@@ -30,6 +32,8 @@ export type IconoBeneficio =
 export interface Obra {
   id: string
   titulo: string
+  tipo: string
+  especificacion: string
   imagen: string
   testimonio: string
   autor: string

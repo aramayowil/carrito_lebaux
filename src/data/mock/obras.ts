@@ -8,6 +8,8 @@ export const obras: Obra[] = [
   {
     id: "obra-1",
     titulo: "Casa Johana",
+    tipo: "Proyecto residencial",
+    especificacion: "Fabricación a medida",
     imagen: "/img/obra_johana.jpg",
     testimonio:
       "Hermoso trabajo, quedó bello todo! Estoy muy contenta, los chicos son excelentes y las aberturas de una calidad increíble. Gracias Lebaux por ayudarnos a cumplir nuestro sueño!",
@@ -16,14 +18,18 @@ export const obras: Obra[] = [
   {
     id: "obra-2",
     titulo: "Módena negro 6 hojas",
+    tipo: "Proyecto residencial",
+    especificacion: "Corrediza negra · 6 hojas",
     imagen: "/img/modena_negro_obra.jpg",
     testimonio:
-      "Cambiamos todas las aberturas de la casa por la línea Herrero negra. Quedó súper moderna y el trabajo fue rapidísimo.",
+      "Cambiamos todas las aberturas de la casa por perfiles negros. Quedó súper moderna y el trabajo fue rapidísimo.",
     autor: "Sofía Martínez",
   },
   {
     id: "obra-3",
     titulo: "Corredizas Marcos y Ruth",
+    tipo: "Renovación residencial",
+    especificacion: "Aberturas corredizas",
     imagen: "/img/modena_obra_marcos.jpg",
     testimonio:
       "Muy buena atención en la oficina y los muchachos que instalaron fueron excelentes y muy prolijos. Lo recomiendo, además el material es muy bueno.",

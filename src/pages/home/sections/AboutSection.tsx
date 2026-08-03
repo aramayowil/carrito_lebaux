@@ -10,16 +10,19 @@ import { ProductImage } from "@/components/media/ProductImage"
  */
 export function AboutSection() {
   return (
-    <section id="nosotros" className="bg-muted/40 py-20">
+    <section id="nosotros" className="bg-background py-20">
       <div className="container grid items-center gap-12 md:grid-cols-2">
         <div>
           <p className="eyebrow mb-2">Desde Tucumán</p>
-          <h2 className="section-title section-title-left mb-6">Quiénes somos</h2>
+          <h2 className="section-title section-title-left mb-6">
+            Quiénes somos
+          </h2>
           <p className="leading-relaxed text-muted-foreground">
-            Fábrica de aberturas de aluminio a medida para todo tipo de proyectos. Ofrecemos
-            ventanas, puertas y cerramientos con excelente relación precio-calidad, adaptados a cada
-            necesidad. Trabajamos con líneas Herrero y Módena de alta prestación, garantizando
-            durabilidad y diseño.
+            Fábrica de aberturas de aluminio a medida para todo tipo de
+            proyectos. Ofrecemos ventanas, puertas y cerramientos con excelente
+            relación precio-calidad, adaptados a cada necesidad. Trabajamos con
+            líneas Herrero y Módena de alta prestación, garantizando durabilidad
+            y diseño.
           </p>
           <div className="dim-line mt-8">Fabricación propia</div>
         </div>
