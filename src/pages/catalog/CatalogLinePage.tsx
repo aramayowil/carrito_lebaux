@@ -57,7 +57,7 @@ export function CatalogLinePage({ line }: CatalogLinePageProps) {
   }
 
   return (
-    <div className="bg-linear-to-b from-accent/55 via-background to-background py-8 sm:py-12">
+    <div className="bg-background py-8 sm:py-12">
       <div className="container">
         <Card className="mx-auto mb-10 max-w-3xl rounded-3xl border-border/70 bg-background/80 py-0 text-center shadow-sm backdrop-blur">
           <CardContent className="px-6 py-8 sm:px-8 lg:px-10">
