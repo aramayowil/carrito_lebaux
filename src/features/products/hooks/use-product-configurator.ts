@@ -10,9 +10,17 @@ import type {
 } from "@/types"
 
 function crearSeleccionInicial(producto: Producto): SeleccionProducto {
+  const primerColorDisponible = producto.colores[0]
+
+  if (!primerColorDisponible) {
+    throw new Error(
+      `El producto "${producto.nombre}" no tiene colores disponibles`,
+    )
+  }
+
   return {
     medidaId: producto.medidas[0]?.id ?? "",
-    colorSlug: producto.colores[0]?.slug ?? "blanco",
+    colorSlug: primerColorDisponible.slug,
     vidrioSlug: producto.opcionesVidrio[0]?.slug ?? null,
     accesoriosSlug: producto.accesorios
       .filter((accesorio) => accesorio.incluidoPorDefecto)

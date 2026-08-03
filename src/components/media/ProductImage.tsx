@@ -16,11 +16,16 @@ interface ProductImageProps {
  * romper el layout con un ícono roto del navegador.
  *
  * Vive en `components/media` (no en `components/ui`, que es solo shadcn
- * CLI, ni en un `features/`, porque no es lógica de negocio) porque hoy
- * la usan dos secciones de distintas páginas (Obras, About) y más
- * adelante la va a usar `features/products` y `features/cart`.
+ * CLI, ni en un `features/`, porque no es lógica de negocio) porque se
+ * comparte entre las secciones institucionales y los features de producto
+ * y carrito.
  */
-export function ProductImage({ src, alt, className, imgClassName }: ProductImageProps) {
+export function ProductImage({
+  src,
+  alt,
+  className,
+  imgClassName,
+}: ProductImageProps) {
   const [failed, setFailed] = useState(false)
 
   if (failed) {

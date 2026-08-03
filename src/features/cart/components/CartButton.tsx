@@ -16,7 +16,7 @@ export function CartButton() {
     <div className="fixed bottom-5 right-5 z-40 sm:bottom-7 sm:right-7">
       {count > 0 && (
         <span
-          className="absolute inset-0 animate-ping rounded-full bg-primary/25"
+          className="animate-cart-wave pointer-events-none absolute inset-0 rounded-full bg-primary/30"
           aria-hidden="true"
         />
       )}
@@ -26,7 +26,7 @@ export function CartButton() {
         aria-label={
           count > 0 ? `Abrir carrito, ${count} unidades` : "Abrir carrito"
         }
-        className="relative size-14 rounded-full shadow-xl transition-transform hover:scale-105"
+        className="relative size-14 rounded-full border-primary bg-clip-border shadow-xl transition-transform hover:scale-105 hover:border-primary/80"
       >
         <ShoppingCart className="size-6" />
         {count > 0 && (

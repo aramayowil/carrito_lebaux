@@ -32,6 +32,26 @@ interface ProductConfiguratorProps {
   product: Producto
 }
 
+function esColorDisponible(
+  product: Producto,
+  value: unknown,
+): value is SlugColorPerfil {
+  return (
+    typeof value === "string" &&
+    product.colores.some((color) => color.slug === value)
+  )
+}
+
+function esVidrioDisponible(
+  product: Producto,
+  value: unknown,
+): value is SlugOpcionVidrio {
+  return (
+    typeof value === "string" &&
+    product.opcionesVidrio.some((vidrio) => vidrio.slug === value)
+  )
+}
+
 /** Configura una abertura, calcula ambos precios y la agrega al carrito persistente. */
 export function ProductConfigurator({ product }: ProductConfiguratorProps) {
   const {
@@ -46,6 +66,23 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
   } = useProductConfigurator(product)
   const agregarItem = useCartStore((state) => state.agregarItem)
   const abrirCarrito = useCartUIStore((state) => state.abrirCarrito)
+  const medidaSeleccionada = product.medidas.find(
+    (medida) => medida.id === seleccion.medidaId,
+  )
+  const handleColorChange = (value: unknown) => {
+    if (esColorDisponible(product, value)) setColor(value)
+  }
+  const handleMedidaChange = (value: unknown) => {
+    if (
+      typeof value === "string" &&
+      product.medidas.some((medida) => medida.id === value)
+    ) {
+      setMedida(value)
+    }
+  }
+  const handleVidrioChange = (value: unknown) => {
+    if (value === null || esVidrioDisponible(product, value)) setVidrio(value)
+  }
   const whatsappHref = buildWhatsAppUrl(
     buildConfiguredProductMessage(product, seleccion, cantidad, desglose),
   )
@@ -56,7 +93,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
         <Label className="mb-2 block">Color del perfil</Label>
         <RadioGroup
           value={seleccion.colorSlug}
-          onValueChange={(value) => setColor(value as SlugColorPerfil)}
+          onValueChange={handleColorChange}
           className="grid grid-cols-1 gap-2 sm:grid-cols-3"
         >
           {product.colores.map((color) => (
@@ -64,7 +101,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
               key={color.slug}
               htmlFor={`color-${product.id}-${color.slug}`}
               className={cn(
-                "flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl border p-3 transition-colors",
+                "relative flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-2xl border p-3 text-center transition-colors has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/30",
                 seleccion.colorSlug === color.slug
                   ? "border-primary bg-accent"
                   : "hover:border-primary/50",
@@ -73,6 +110,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
               <RadioGroupItem
                 id={`color-${product.id}-${color.slug}`}
                 value={color.slug}
+                className="absolute inset-0 size-full cursor-pointer opacity-0"
               />
               <span
                 className="size-5 rounded-full border border-border shadow-sm"
@@ -90,13 +128,15 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           <Label htmlFor={`medida-${product.id}`}>Medida (base × altura)</Label>
           <Select
             value={seleccion.medidaId}
-            onValueChange={(value) => setMedida(String(value))}
+            onValueChange={handleMedidaChange}
           >
             <SelectTrigger
               id={`medida-${product.id}`}
               className="h-11 w-full rounded-xl"
             >
-              <SelectValue placeholder="Elegí una medida" />
+              <SelectValue>
+                {medidaSeleccionada?.etiqueta ?? "Elegí una medida"}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {product.medidas.map((medida) => (
@@ -120,7 +160,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           {product.opcionesVidrio.length > 0 ? (
             <Select
               value={seleccion.vidrioSlug ?? undefined}
-              onValueChange={(value) => setVidrio(value as SlugOpcionVidrio)}
+              onValueChange={handleVidrioChange}
             >
               <SelectTrigger
                 id={`vidrio-${product.id}`}

@@ -1,7 +1,6 @@
 import { useMemo } from "react"
 import { useSearchParams } from "react-router-dom"
 
-import { ProductImage } from "@/components/media/ProductImage"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -60,24 +59,18 @@ export function CatalogLinePage({ line }: CatalogLinePageProps) {
   return (
     <div className="bg-linear-to-b from-accent/55 via-background to-background py-8 sm:py-12">
       <div className="container">
-        <Card className="mb-10 grid gap-0 overflow-hidden border border-primary/20 py-0 md:grid-cols-[1fr_0.8fr]">
-          <CardContent className="flex flex-col justify-center p-7 sm:p-10">
-            <p className="eyebrow mb-3">Línea de fabricación</p>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
+        <Card className="mx-auto mb-10 max-w-3xl rounded-3xl border-border/70 bg-background/80 py-0 text-center shadow-sm backdrop-blur">
+          <CardContent className="px-6 py-8 sm:px-8 lg:px-10">
+            <p className="eyebrow mb-3 justify-center text-center text-xs">
+              Línea de fabricación
+            </p>
+            <h1 className="section-title mb-4 text-3xl sm:text-4xl lg:text-5xl">
               {lineInfo.nombre}
             </h1>
-            <p className="mt-2 text-lg font-medium text-primary">
-              {lineInfo.subtitulo}
-            </p>
-            <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
+            <p className="mx-auto max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
               {lineInfo.descripcion}
             </p>
           </CardContent>
-          <ProductImage
-            src={lineInfo.imagenPortada}
-            alt={`Abertura de ${lineInfo.nombre}`}
-            className="h-64 bg-white md:h-full md:min-h-80"
-          />
         </Card>
 
         <div

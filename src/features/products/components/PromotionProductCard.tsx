@@ -30,7 +30,11 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
 
   return (
     <Card className="group h-full gap-0 overflow-hidden border border-primary/20 bg-linear-to-br from-card via-card to-accent/35 py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative border-b border-border/60 bg-white p-4">
+      <Link
+        to={`/producto/${product.slug}`}
+        className="relative border-b border-border/60 bg-white p-4"
+        aria-label={`Ver ${product.nombre}`}
+      >
         <Badge className="absolute left-4 top-4 z-10 gap-1 uppercase tracking-widest">
           <Sparkles data-icon="inline-start" />
           {precios.porcentajeDescuento}% OFF
@@ -41,7 +45,7 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
           className="h-56 w-full rounded-xl sm:h-60"
           imgClassName="transition-transform duration-300 group-hover:scale-105"
         />
-      </div>
+      </Link>
 
       <CardHeader className="pt-5">
         <div className="mb-2 flex items-center justify-between gap-3">
@@ -53,7 +57,9 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
           </span>
         </div>
         <CardTitle className="text-base font-semibold uppercase leading-snug tracking-tight">
-          {product.nombre}
+          <Link to={`/producto/${product.slug}`} className="hover:text-primary">
+            {product.nombre}
+          </Link>
         </CardTitle>
         <CardDescription className="line-clamp-3 leading-6">
           {product.descripcion}
@@ -92,7 +98,7 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
           size="lg"
           className="w-full rounded-full"
           render={
-            <Link to={`/producto/`}>
+            <Link to={`/producto/${product.slug}`}>
               Ver oferta
               <ArrowRight data-icon="inline-end" />
             </Link>

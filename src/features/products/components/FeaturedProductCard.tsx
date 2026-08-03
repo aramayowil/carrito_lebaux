@@ -30,7 +30,11 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
 
   return (
     <Card className="group grid h-full gap-0 overflow-hidden border border-primary/30 py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:grid-cols-2">
-      <div className="corner-marks relative min-h-64 bg-white p-6">
+      <Link
+        to={`/producto/${product.slug}`}
+        className="corner-marks relative min-h-64 bg-white p-6"
+        aria-label={`Ver ${product.nombre}`}
+      >
         <Badge className="absolute left-4 top-4 z-10 gap-1 uppercase tracking-wide">
           <Star data-icon="inline-start" className="fill-current" />
           Destacado
@@ -40,12 +44,17 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
           alt={primaryImage?.textoAlternativo ?? product.nombre}
           className="h-64 w-full sm:h-full sm:min-h-80"
         />
-      </div>
+      </Link>
 
       <div className="flex flex-col py-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold tracking-tight">
-            {product.nombre}
+            <Link
+              to={`/producto/${product.slug}`}
+              className="hover:text-primary"
+            >
+              {product.nombre}
+            </Link>
           </CardTitle>
           <CardDescription className="leading-relaxed">
             {product.descripcion}
@@ -93,7 +102,7 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
           <Button
             size="lg"
             className="w-full sm:w-fit"
-            render={<Link to={`/producto/`}>Ver opciones</Link>}
+            render={<Link to={`/producto/${product.slug}`}>Ver opciones</Link>}
           />
         </CardFooter>
       </div>
