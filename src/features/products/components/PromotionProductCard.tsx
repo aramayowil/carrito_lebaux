@@ -29,44 +29,47 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
   const lineLabel = product.linea === "modena" ? "Módena" : "Herrero"
 
   return (
-    <Card className="group h-full gap-0 overflow-hidden border border-primary/20 bg-linear-to-br from-card via-card to-accent/35 py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <Card className="group h-full gap-0 overflow-hidden border border-primary/25 bg-linear-to-br from-card via-card to-accent/35 py-0 shadow-md transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl">
       <Link
         to={`/producto/${product.slug}`}
-        className="relative border-b border-border/60 bg-white p-4"
+        className="corner-marks relative border-b border-border/60 bg-white p-3 sm:p-4"
         aria-label={`Ver ${product.nombre}`}
       >
-        <Badge className="absolute left-4 top-4 z-10 gap-1 uppercase tracking-widest">
+        <Badge className="absolute left-3 top-3 z-10 gap-1 text-[0.625rem] uppercase tracking-widest sm:left-4 sm:top-4 sm:text-xs">
           <Sparkles data-icon="inline-start" />
           {precios.porcentajeDescuento}% OFF
         </Badge>
         <ProductImage
           src={primaryImage?.url ?? ""}
           alt={primaryImage?.textoAlternativo ?? product.nombre}
-          className="h-56 w-full rounded-xl sm:h-60"
+          className="h-48 w-full rounded-xl sm:h-60 sm:rounded-2xl"
           imgClassName="transition-transform duration-300 group-hover:scale-105"
         />
       </Link>
 
-      <CardHeader className="pt-5">
-        <div className="mb-2 flex items-center justify-between gap-3">
-          <Badge variant="secondary" className="uppercase tracking-widest">
+      <CardHeader className="px-4 pt-4 sm:px-5 sm:pt-5">
+        <div className="mb-1.5 flex items-center justify-between gap-3 sm:mb-2">
+          <Badge
+            variant="secondary"
+            className="text-[0.625rem] uppercase tracking-widest sm:text-xs"
+          >
             {lineLabel}
           </Badge>
-          <span className="text-xs capitalize text-muted-foreground">
+          <span className="hidden text-xs capitalize text-muted-foreground sm:inline">
             {product.categoria}
           </span>
         </div>
-        <CardTitle className="text-base font-semibold uppercase leading-snug tracking-tight">
+        <CardTitle className="line-clamp-2 text-sm font-semibold uppercase leading-snug tracking-tight sm:text-base">
           <Link to={`/producto/${product.slug}`} className="hover:text-primary">
             {product.nombre}
           </Link>
         </CardTitle>
-        <CardDescription className="line-clamp-3 leading-6">
+        <CardDescription className="mt-1 hidden leading-6 md:line-clamp-2">
           {product.descripcion}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="mt-4 flex-1">
+      <CardContent className="mt-3 flex-1 px-4 sm:mt-4 sm:px-5">
         {precios.consultarPrecio || precios.precioTarjeta === null ? (
           <p className="text-sm italic text-muted-foreground">
             Precio a consultar
@@ -74,8 +77,10 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
         ) : (
           <div className="space-y-2">
             <div className="flex flex-wrap items-baseline gap-2">
-              <span className="text-sm text-muted-foreground">Ahora</span>
-              <span className="text-2xl font-bold text-foreground">
+              <span className="text-xs text-muted-foreground sm:text-sm">
+                Ahora
+              </span>
+              <span className="text-xl font-bold text-foreground sm:text-2xl">
                 {formatProductPrice(
                   precios.precioContado ?? precios.precioTarjeta,
                 )}
@@ -85,7 +90,7 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
               <span className="text-muted-foreground line-through">
                 {formatProductPrice(precios.precioTarjeta)}
               </span>
-              <Badge className="bg-success/10 text-success">
+              <Badge className="hidden bg-success/10 text-success sm:inline-flex">
                 Ahorro asegurado
               </Badge>
             </div>
@@ -93,10 +98,10 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
         )}
       </CardContent>
 
-      <CardFooter className="pb-5 pt-4">
+      <CardFooter className="px-4 pb-4 pt-3 sm:px-5 sm:pb-5 sm:pt-4">
         <Button
           size="lg"
-          className="w-full rounded-full"
+          className="w-full rounded-xl"
           render={
             <Link to={`/producto/${product.slug}`}>
               Ver oferta
