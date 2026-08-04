@@ -37,6 +37,7 @@ export function CheckoutDialog() {
   const [nombre, setNombre] = useState("")
   const [formaPago, setFormaPago] = useState<FormaPago>("contado")
   const [submitted, setSubmitted] = useState(false)
+  const whatsappPhone = useWhatsappPhone()
 
   const nombreInvalid = submitted && nombre.trim().length < 2
   const total =

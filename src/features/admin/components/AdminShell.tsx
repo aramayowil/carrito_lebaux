@@ -14,7 +14,6 @@ import { Link, NavLink, Outlet, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
@@ -43,7 +42,8 @@ function AdminNavLinks({ onNavigate }: { onNavigate?: () => void }) {
           className={({ isActive }) =>
             cn(
               "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-              isActive && "bg-primary/10 text-primary hover:bg-primary/10 hover:text-primary",
+              isActive &&
+                "bg-primary/10 text-primary hover:bg-primary/10 hover:text-primary",
             )
           }
         >
@@ -102,7 +102,9 @@ export function AdminShell() {
                 }
               />
               <SheetContent side="left" className="w-72">
-                <SheetTitle className="sr-only">Menú del panel admin</SheetTitle>
+                <SheetTitle className="sr-only">
+                  Menú del panel admin
+                </SheetTitle>
                 <div className="flex h-16 items-center border-b px-5">
                   <span className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
                     Lebaux / admin

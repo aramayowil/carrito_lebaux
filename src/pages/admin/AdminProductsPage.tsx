@@ -32,7 +32,9 @@ export function AdminProductsPage() {
   const productosFiltrados = useMemo(() => {
     const texto = busqueda.trim().toLowerCase()
     return productos
-      .filter((producto) => lineaFiltro === "todas" || producto.linea === lineaFiltro)
+      .filter(
+        (producto) => lineaFiltro === "todas" || producto.linea === lineaFiltro,
+      )
       .filter(
         (producto) =>
           !texto ||
@@ -51,7 +53,10 @@ export function AdminProductsPage() {
             {productos.length} producto(s) cargados en total.
           </p>
         </div>
-        <Button className="rounded-xl" render={<Link to="/admin/productos/nuevo" />}>
+        <Button
+          className="rounded-xl"
+          render={<Link to="/admin/productos/nuevo" />}
+        >
           <Plus data-icon="inline-start" />
           Nuevo producto
         </Button>
@@ -67,7 +72,10 @@ export function AdminProductsPage() {
             className="pl-9"
           />
         </div>
-        <Select value={lineaFiltro} onValueChange={setLineaFiltro}>
+        <Select
+          value={lineaFiltro}
+          onValueChange={(value) => setLineaFiltro(value ?? "todas")}
+        >
           <SelectTrigger className="w-full sm:w-48">
             <SelectValue />
           </SelectTrigger>
@@ -113,7 +121,8 @@ export function AdminProductsPage() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium">{producto.nombre}</p>
                   <p className="text-xs text-muted-foreground">
-                    {linea?.nombre} · {CATEGORIAS_PRODUCTO[producto.categoria].etiqueta}
+                    {linea?.nombre} ·{" "}
+                    {CATEGORIAS_PRODUCTO[producto.categoria].etiqueta}
                   </p>
                   <div className="mt-1 flex flex-wrap gap-1.5">
                     {producto.destacado && (
@@ -127,7 +136,10 @@ export function AdminProductsPage() {
                       </Badge>
                     )}
                     {!producto.disponible && (
-                      <Badge variant="outline" className="rounded-full text-muted-foreground">
+                      <Badge
+                        variant="outline"
+                        className="rounded-full text-muted-foreground"
+                      >
                         No disponible
                       </Badge>
                     )}
@@ -147,7 +159,9 @@ export function AdminProductsPage() {
                     variant="outline"
                     size="sm"
                     className="rounded-xl"
-                    render={<Link to={`/admin/productos/${producto.id}/editar`} />}
+                    render={
+                      <Link to={`/admin/productos/${producto.id}/editar`} />
+                    }
                   >
                     Editar
                   </Button>
