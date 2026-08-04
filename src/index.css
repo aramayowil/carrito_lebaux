@@ -216,6 +216,15 @@
   html {
     @apply font-sans;
   }
+
+  /* Base UI conserva el gutter del scrollbar al bloquear el documento.
+     Mientras el Sheet oscuro de navegación está abierto, el canvas raíz y
+     sus controles nativos también usan esquema oscuro. El selector está
+     acotado para no alterar CartDrawer ni los Dialog claros. */
+  html:has([data-mobile-navigation]) {
+    background-color: var(--brand-black);
+    color-scheme: dark;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -369,7 +378,6 @@
   .text-balance {
     text-wrap: balance;
   }
-
 }
 
 /* Quien pide menos movimiento (prefers-reduced-motion) no debería ver

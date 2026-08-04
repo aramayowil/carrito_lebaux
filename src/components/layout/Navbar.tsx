@@ -72,6 +72,7 @@ export function Navbar() {
             <SheetContent
               side="right"
               showCloseButton={false}
+              data-mobile-navigation=""
               className="w-[min(92vw,24rem)] max-w-none gap-0 border-l border-white/10 bg-brand-black p-0 text-white"
             >
               <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
@@ -92,7 +93,7 @@ export function Navbar() {
               </div>
               <nav
                 aria-label="Principal mobile"
-                className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 [scrollbar-color:color-mix(in_oklch,var(--primary)_55%,transparent)_transparent] [scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb:hover]:bg-primary/70 [&::-webkit-scrollbar-track]:bg-transparent"
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 [color-scheme:dark]"
               >
                 <div className="mb-6">
                   <p className="mb-2 px-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-white/40">
