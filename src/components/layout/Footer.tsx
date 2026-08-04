@@ -22,10 +22,10 @@ export function Footer() {
 
   return (
     <footer className="bg-brand-black text-white">
-      <div className="container grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <Logo variant="cropped" className="mb-6" />
-          <p className="mb-6 max-w-xs text-sm leading-7 text-white/60">
+      <div className="container grid grid-cols-2 gap-x-6 gap-y-9 py-10 sm:gap-x-8 sm:gap-y-10 sm:py-12 md:grid-cols-2 lg:grid-cols-4 lg:py-14">
+        <div className="col-span-2 md:col-span-1">
+          <Logo variant="cropped" className="mb-4 sm:mb-5" />
+          <p className="mb-5 max-w-md text-sm leading-6 text-white/60 sm:leading-7">
             {configuracionSitio.descripcion}
           </p>
           <div className="flex gap-3">
@@ -53,30 +53,36 @@ export function Footer() {
           </div>
         </div>
 
-        <nav aria-label="Líneas del catálogo">
-          <h2 className="eyebrow mb-4">Líneas</h2>
-          <ul className="space-y-2.5 text-sm text-white/70">
+        <nav aria-label="Líneas del catálogo" className="min-w-0">
+          <h2 className="eyebrow mb-3 sm:mb-4">Líneas</h2>
+          <ul className="space-y-1.5 text-sm text-white/70 sm:space-y-2.5">
             <li>
-              <Link to="/herrero" className="hover:text-primary">
+              <Link
+                to="/herrero"
+                className="inline-block py-1 hover:text-primary"
+              >
                 Línea Herrero
               </Link>
             </li>
             <li>
-              <Link to="/modena" className="hover:text-primary">
+              <Link
+                to="/modena"
+                className="inline-block py-1 hover:text-primary"
+              >
                 Línea Módena
               </Link>
             </li>
           </ul>
         </nav>
 
-        <nav aria-label="Categorías del catálogo">
-          <h2 className="eyebrow mb-4">Categorías</h2>
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-white/70 lg:grid-cols-1">
+        <nav aria-label="Categorías del catálogo" className="min-w-0">
+          <h2 className="eyebrow mb-3 sm:mb-4">Categorías</h2>
+          <ul className="grid gap-x-4 gap-y-1.5 text-sm text-white/70 sm:grid-cols-2 sm:gap-y-2.5 lg:grid-cols-1">
             {ORDEN_CATEGORIAS.map((category) => (
               <li key={category}>
                 <Link
                   to={`/modena?categoria=${category}`}
-                  className="hover:text-primary"
+                  className="inline-block py-1 hover:text-primary"
                 >
                   {CATEGORIAS_PRODUCTO[category].etiqueta}
                 </Link>
@@ -85,8 +91,8 @@ export function Footer() {
           </ul>
         </nav>
 
-        <div>
-          <h2 className="eyebrow mb-4">Contacto</h2>
+        <div className="col-span-2 md:col-span-1">
+          <h2 className="eyebrow mb-3 sm:mb-4">Contacto</h2>
           <p className="mb-3 flex items-start gap-3 text-sm text-white/80">
             <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
             {contacto.direccion}, {contacto.ciudad}
@@ -108,7 +114,7 @@ export function Footer() {
             <iframe
               src={contacto.urlMapaEmbebido}
               title="Ubicación de Lebaux Aberturas"
-              className="h-48 w-full border-0"
+              className="h-40 w-full border-0 sm:h-48"
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
@@ -117,8 +123,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-5">
-        <div className="container flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+      <div className="border-t border-white/10 py-4 sm:py-5">
+        <div className="container flex flex-col items-center gap-3 sm:flex-row sm:justify-between sm:gap-4">
           <p className="text-center text-xs uppercase tracking-wide text-white/40 sm:text-left">
             &copy; {new Date().getFullYear()} {configuracionSitio.nombreLegal}.
             Todos los derechos reservados.
@@ -126,7 +132,7 @@ export function Footer() {
           <Button
             variant="ghost"
             size="sm"
-            className="text-white/60 hover:bg-white/10 hover:text-white"
+            className="rounded-xl text-white/60 hover:bg-primary/10 hover:text-primary"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             Volver arriba <ArrowUp data-icon="inline-end" />

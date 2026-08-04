@@ -23,7 +23,7 @@ export function Logo({ className, variant = "full" }: LogoProps) {
         alt={configuracionSitio.nombre}
         className={cn(
           "w-auto object-contain",
-          isCropped ? "h-20" : "h-8 md:h-9",
+          isCropped ? "h-12 sm:h-16 lg:h-20" : "h-8 md:h-9",
         )}
         loading="eager"
         decoding="async"
