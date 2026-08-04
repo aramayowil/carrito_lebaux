@@ -69,6 +69,10 @@
      sin sintaxis arbitraria; donde hace falta `calc()` (Hero) se sigue
      usando `var(--spacing-navbar)` arbitrario. */
   --spacing-navbar: 5rem; /* 80px, = h-20 */
+
+  /* Escala responsive adicional para dispositivos muy estrechos. Se expresa
+     en rem y se consume como variante semántica `xs:`. */
+  --breakpoint-xs: 22.5rem;
 }
 
 :root {

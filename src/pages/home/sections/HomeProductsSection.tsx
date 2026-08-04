@@ -59,7 +59,7 @@ export function HomeProductsSection({ products }: HomeProductsSectionProps) {
                   {promotions.map((product) => (
                     <CarouselItem
                       key={product.id}
-                      className="basis-full min-[360px]:basis-1/2 md:basis-1/3 xl:basis-1/4"
+                      className="basis-full xs:basis-1/2 md:basis-1/3 xl:basis-1/4"
                     >
                       <PromotionProductCard product={product} />
                     </CarouselItem>
@@ -91,7 +91,7 @@ export function HomeProductsSection({ products }: HomeProductsSectionProps) {
               distintas medidas.
             </p>
 
-            <div className="grid grid-cols-1 gap-4 min-[360px]:grid-cols-2 min-[360px]:gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 xs:grid-cols-2 xs:gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
               {featured.map((product) => (
                 <FeaturedProductCard key={product.id} product={product} />
               ))}

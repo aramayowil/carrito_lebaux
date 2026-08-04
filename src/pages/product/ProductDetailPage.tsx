@@ -139,7 +139,7 @@ export function ProductDetailPage() {
             <h2 id="related-title" className="mb-6 text-2xl font-bold">
               Productos relacionados
             </h2>
-            <div className="grid grid-cols-1 gap-4 min-[360px]:grid-cols-2 min-[360px]:gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 xs:grid-cols-2 xs:gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
               {related.map((item) => (
                 <CatalogProductCard key={item.id} product={item} />
               ))}

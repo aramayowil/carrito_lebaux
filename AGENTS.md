@@ -36,6 +36,12 @@ Stack: React 19 + Vite + TypeScript + Tailwind CSS v4 + shadcn/ui + Zustand.
    consumen solo vía clases de Tailwind (`bg-primary`, `text-success`, etc.),
    nunca hex hardcodeado en componentes.
 
+5. **Responsive sin píxeles hardcodeados.**
+   Usar la escala de Tailwind y sus breakpoints semánticos. Si hace falta un
+   breakpoint adicional, definirlo como token en `@theme` usando `rem` y
+   consumir su variante; no usar clases como `min-[360px]:...`. Ver
+   `docs/2026-08-03-breakpoint-responsive-xs.md`.
+
 ## Estructura de carpetas (Screaming Architecture)
 
 ```
@@ -110,6 +116,9 @@ src/
       `docs/2026-08-03-migracion-catalogo-carrito-checkout.md`).
 - [x] Carrito persistente con Zustand y checkout por WhatsApp en
       `features/cart` y `features/checkout`.
+- [x] Rework visual y responsive de checkout, catálogos, Home, navegación,
+      Footer y cards de producto (ver
+      `docs/2026-08-03-cierre-rework-visual-responsive.md`).
 - [ ] Conexión a datos reales (hoy `data/mock`).
 
 Cuando se complete un ítem o se agregue uno nuevo, actualizar esta lista y sumar
