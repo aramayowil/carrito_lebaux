@@ -29,7 +29,7 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
   const { precios } = product
 
   return (
-    <Card className="group grid h-full gap-0 overflow-hidden border border-primary/25 py-0 shadow-md transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl sm:grid-cols-2">
+    <Card className="group grid h-full gap-0 overflow-hidden border border-primary/25 py-0 shadow-md transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl">
       <Link
         to={`/producto/${product.slug}`}
         className="corner-marks relative bg-white p-4 sm:p-5"
@@ -42,14 +42,14 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
         <ProductImage
           src={primaryImage?.url ?? ""}
           alt={primaryImage?.textoAlternativo ?? product.nombre}
-          className="aspect-[4/3] w-full rounded-2xl sm:h-full sm:min-h-72 sm:aspect-auto"
+          className="aspect-[4/3] w-full rounded-xl sm:rounded-2xl"
           imgClassName="transition-transform duration-300 group-hover:scale-[1.03]"
         />
       </Link>
 
       <div className="flex flex-col py-4 sm:py-6">
-        <CardHeader className="px-4 sm:px-5">
-          <CardTitle className="line-clamp-2 text-lg font-bold tracking-tight sm:text-xl">
+        <CardHeader className="px-3 sm:px-5">
+          <CardTitle className="line-clamp-2 text-sm font-bold tracking-tight sm:text-xl">
             <Link
               to={`/producto/${product.slug}`}
               className="hover:text-primary"
@@ -57,12 +57,12 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
               {product.nombre}
             </Link>
           </CardTitle>
-          <CardDescription className="mt-1 hidden leading-6 md:line-clamp-3">
+          <CardDescription className="mt-1 hidden leading-6 lg:line-clamp-3">
             {product.descripcion}
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="mt-3 flex-1 px-4 sm:mt-5 sm:px-5">
+        <CardContent className="mt-3 flex-1 px-3 sm:mt-5 sm:px-5">
           {precios.consultarPrecio || precios.precioTarjeta === null ? (
             <p className="text-sm italic text-muted-foreground">
               Precio a consultar
@@ -76,7 +76,7 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
                 <span className="text-2xl font-bold text-foreground sm:text-3xl">
                   {formatProductPrice(precios.precioTarjeta)}
                 </span>
-                <Badge variant="secondary" className="hidden md:inline-flex">
+                <Badge variant="secondary" className="hidden xl:inline-flex">
                   Hasta 6 cuotas sin interés
                 </Badge>
               </div>
@@ -95,18 +95,19 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
             </div>
           )}
 
-          <Badge variant="outline" className="mt-4">
+          <Badge variant="outline" className="mt-4 hidden sm:inline-flex">
             {formatAvailableSizes(product.medidas.length)}
           </Badge>
         </CardContent>
 
-        <CardFooter className="mt-4 px-4 sm:mt-5 sm:px-5">
+        <CardFooter className="mt-4 px-3 sm:mt-5 sm:px-5">
           <Button
-            size="lg"
-            className="w-full rounded-xl"
+            size="sm"
+            className="h-9 w-full rounded-xl px-3 text-xs sm:h-10 sm:text-sm"
             render={<Link to={`/producto/${product.slug}`} />}
           >
-            Ver opciones
+            <span className="sm:hidden">Ver</span>
+            <span className="hidden sm:inline">Ver opciones</span>
             <ArrowRight data-icon="inline-end" />
           </Button>
         </CardFooter>

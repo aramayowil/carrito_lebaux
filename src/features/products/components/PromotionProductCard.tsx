@@ -42,7 +42,7 @@ export function PromotionProductCard({ product }: PromotionProductCardProps) {
         <ProductImage
           src={primaryImage?.url ?? ""}
           alt={primaryImage?.textoAlternativo ?? product.nombre}
-          className="h-48 w-full rounded-xl sm:h-60 sm:rounded-2xl"
+          className="h-48 w-full rounded-xl min-[360px]:h-36 sm:h-48 sm:rounded-2xl xl:h-56"
           imgClassName="transition-transform duration-300 group-hover:scale-105"
         />
       </Link>

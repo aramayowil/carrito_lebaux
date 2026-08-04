@@ -11,9 +11,12 @@ interface ProductGridProps {
 export function ProductGrid({ products, loading = false }: ProductGridProps) {
   if (loading) {
     return (
-      <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 min-[360px]:grid-cols-2 min-[360px]:gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
         {Array.from({ length: 8 }).map((_, index) => (
-          <Skeleton key={index} className="h-80 rounded-2xl sm:h-96" />
+          <Skeleton
+            key={index}
+            className="h-[28rem] rounded-2xl min-[360px]:h-80 sm:h-96"
+          />
         ))}
       </div>
     )
@@ -28,7 +31,7 @@ export function ProductGrid({ products, loading = false }: ProductGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 min-[360px]:grid-cols-2 min-[360px]:gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
       {products.map((product) => (
         <CatalogProductCard key={product.id} product={product} />
       ))}
