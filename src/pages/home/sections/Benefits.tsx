@@ -7,7 +7,7 @@ import {
 } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { beneficios } from "@/data/mock"
+import { useContentStore } from "@/store/use-content-store"
 import type { IconoBeneficio } from "@/types"
 
 const ICONOS: Record<IconoBeneficio, LucideIcon> = {
@@ -21,6 +21,8 @@ const ICONOS: Record<IconoBeneficio, LucideIcon> = {
  * Resume las ventajas concretas del proceso de compra y fabricación Lebaux.
  */
 export function Benefits() {
+  const beneficios = useContentStore((state) => state.beneficios)
+
   return (
     <section
       id="como-comprar"

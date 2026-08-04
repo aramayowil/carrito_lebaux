@@ -3,10 +3,15 @@ import heroImage from "@/assets/banners/bannerweb.png"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/whatsapp"
+import {
+  buildWhatsAppUrl,
+  DEFAULT_WHATSAPP_MESSAGE,
+  useWhatsappPhone,
+} from "@/lib/whatsapp"
 /** Presenta la propuesta de valor y conduce al catálogo o al asesoramiento. */
 export function Hero() {
-  const whatsappHref = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE)
+  const whatsappPhone = useWhatsappPhone()
+  const whatsappHref = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE, whatsappPhone)
 
   return (
     <section className="relative flex min-h-[calc(100svh-var(--spacing-navbar))] items-center overflow-hidden bg-brand-black py-12 text-white sm:py-16 lg:py-20">

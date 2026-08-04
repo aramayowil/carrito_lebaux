@@ -5,7 +5,7 @@ import { Logo } from "@/components/layout/Logo"
 import { Button } from "@/components/ui/button"
 import { FacebookIcon } from "@/components/icons/FacebookIcon"
 import { InstagramIcon } from "@/components/icons/InstagramIcon"
-import { configuracionSitio } from "@/data/mock"
+import { useContentStore } from "@/store/use-content-store"
 import {
   CATEGORIAS_PRODUCTO,
   ORDEN_CATEGORIAS,
@@ -18,6 +18,7 @@ const ICONOS_REDES = {
 
 /** Pie global con accesos de catálogo, contacto, redes y ubicación. */
 export function Footer() {
+  const configuracionSitio = useContentStore((state) => state.sitio)
   const { contacto } = configuracionSitio
 
   return (
@@ -127,7 +128,14 @@ export function Footer() {
         <div className="container flex flex-col items-center gap-3 sm:flex-row sm:justify-between sm:gap-4">
           <p className="text-center text-xs uppercase tracking-wide text-white/40 sm:text-left">
             &copy; {new Date().getFullYear()} {configuracionSitio.nombreLegal}.
-            Todos los derechos reservados.
+            Todos los derechos reservados.{" "}
+            <Link
+              to="/admin/login"
+              className="text-white/10 no-underline hover:text-white/30"
+              aria-label="Acceso administrador"
+            >
+              ·
+            </Link>
           </p>
           <Button
             variant="ghost"

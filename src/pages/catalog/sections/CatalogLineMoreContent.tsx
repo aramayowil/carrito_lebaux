@@ -20,8 +20,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { LINEAS_PRODUCTO } from "@/features/products/data/catalog-metadata"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { useContentStore } from "@/store/use-content-store"
+import { buildWhatsAppUrl, useWhatsappPhone } from "@/lib/whatsapp"
 import { cn } from "@/lib/utils"
 import type { SlugLineaProducto } from "@/types"
 
@@ -99,9 +99,12 @@ interface CatalogLineMoreContentProps {
 
 /** Completa el catálogo con argumentos de compra, comparación y asesoramiento. */
 export function CatalogLineMoreContent({ line }: CatalogLineMoreContentProps) {
-  const lineInfo = LINEAS_PRODUCTO.find((item) => item.slug === line)!
+  const lineas = useContentStore((state) => state.lineas)
+  const lineInfo = lineas.find((item) => item.slug === line)!
+  const whatsappPhone = useWhatsappPhone()
   const whatsappHref = buildWhatsAppUrl(
     `Hola! Estoy viendo ${lineInfo.nombre} y necesito ayuda para elegir una abertura.`,
+    whatsappPhone,
   )
 
   return (
@@ -164,7 +167,7 @@ export function CatalogLineMoreContent({ line }: CatalogLineMoreContentProps) {
         </div>
 
         <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
-          {LINEAS_PRODUCTO.map((item) => {
+          {lineas.map((item) => {
             const isCurrent = item.slug === line
             return (
               <Card

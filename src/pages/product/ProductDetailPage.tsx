@@ -14,16 +14,15 @@ import { Card, CardContent } from "@/components/ui/card"
 import { CatalogProductCard } from "@/features/products/components/CatalogProductCard"
 import { ProductConfigurator } from "@/features/products/components/ProductConfigurator"
 import { ProductGallery } from "@/features/products/components/ProductGallery"
-import {
-  CATEGORIAS_PRODUCTO,
-  LINEAS_PRODUCTO,
-} from "@/features/products/data/catalog-metadata"
+import { CATEGORIAS_PRODUCTO } from "@/features/products/data/catalog-metadata"
 import { useDocumentMeta } from "@/hooks/use-document-meta"
-import { productos } from "@/data/mock"
+import { useContentStore } from "@/store/use-content-store"
 
 /** Ficha completa del producto: galería, configuración, compra y relacionados. */
 export function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>()
+  const productos = useContentStore((state) => state.productos)
+  const lineas = useContentStore((state) => state.lineas)
   const product = productos.find((item) => item.slug === slug)
 
   useDocumentMeta({
@@ -48,7 +47,7 @@ export function ProductDetailPage() {
   }
 
   const category = CATEGORIAS_PRODUCTO[product.categoria]
-  const line = LINEAS_PRODUCTO.find((item) => item.slug === product.linea)!
+  const line = lineas.find((item) => item.slug === product.linea)!
   const related = productos
     .filter((item) => item.linea === product.linea && item.id !== product.id)
     .sort(

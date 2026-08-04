@@ -5,13 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   CATEGORIAS_PRODUCTO,
-  LINEAS_PRODUCTO,
   ORDEN_CATEGORIAS,
 } from "@/features/products/data/catalog-metadata"
 import { ProductGrid } from "@/features/products/components/ProductGrid"
 import { useDocumentMeta } from "@/hooks/use-document-meta"
 import { CatalogLineMoreContent } from "@/pages/catalog/sections/CatalogLineMoreContent"
-import { productos } from "@/data/mock"
+import { useContentStore } from "@/store/use-content-store"
 import type { CategoriaProducto, SlugLineaProducto } from "@/types"
 
 interface CatalogLinePageProps {
@@ -23,13 +22,15 @@ const CATEGORY_QUERY_PARAM = "categoria"
 /** Página de catálogo reutilizada por las líneas Herrero y Módena. */
 export function CatalogLinePage({ line }: CatalogLinePageProps) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const lineInfo = LINEAS_PRODUCTO.find((item) => item.slug === line)!
+  const productos = useContentStore((state) => state.productos)
+  const lineas = useContentStore((state) => state.lineas)
+  const lineInfo = lineas.find((item) => item.slug === line)!
   const lineProducts = useMemo(
     () =>
       productos.filter(
         (product) => product.linea === line && product.disponible,
       ),
-    [line],
+    [productos, line],
   )
   const presentCategories = useMemo(
     () => new Set(lineProducts.map((product) => product.categoria)),

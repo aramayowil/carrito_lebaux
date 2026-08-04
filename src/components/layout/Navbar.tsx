@@ -16,7 +16,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { buildWhatsAppUrl, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/whatsapp"
+import {
+  buildWhatsAppUrl,
+  DEFAULT_WHATSAPP_MESSAGE,
+  useWhatsappPhone,
+} from "@/lib/whatsapp"
 import { cn } from "@/lib/utils"
 
 /** Cabecera principal con catálogo accesible en desktop y mobile. */
@@ -25,7 +29,8 @@ export function Navbar() {
   const [navbarVisible, setNavbarVisible] = useState(true)
   const lastScrollY = useRef(0)
   const animationFrame = useRef<number | null>(null)
-  const whatsappHref = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE)
+  const whatsappPhone = useWhatsappPhone()
+  const whatsappHref = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE, whatsappPhone)
 
   useEffect(() => {
     lastScrollY.current = window.scrollY

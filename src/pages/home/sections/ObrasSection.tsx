@@ -6,7 +6,7 @@ import { ProductImage } from "@/components/media/ProductImage"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { buildWhatsAppUrl, useWhatsappPhone } from "@/lib/whatsapp"
 
 interface ObrasSectionProps {
   obras: Obra[]
@@ -19,8 +19,10 @@ export function ObrasSection({ obras }: ObrasSectionProps) {
   if (obras.length === 0) return null
 
   const [obraPrincipal, ...obrasSecundarias] = obras
+  const whatsappPhone = useWhatsappPhone()
   const whatsappHref = buildWhatsAppUrl(
     "Hola! Vi los proyectos realizados y quiero asesoramiento para mi obra.",
+    whatsappPhone,
   )
 
   return (

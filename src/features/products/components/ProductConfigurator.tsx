@@ -24,7 +24,7 @@ import { useCartUIStore } from "@/features/cart/store/use-cart-ui-store"
 import { useProductConfigurator } from "@/features/products/hooks/use-product-configurator"
 import { formatProductPrice } from "@/features/products/lib/product-card-formatters"
 import { buildConfiguredProductMessage } from "@/features/products/lib/product-inquiry"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { buildWhatsAppUrl, useWhatsappPhone } from "@/lib/whatsapp"
 import { cn } from "@/lib/utils"
 import type { Producto, SlugColorPerfil, SlugOpcionVidrio } from "@/types"
 
@@ -83,8 +83,10 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
   const handleVidrioChange = (value: unknown) => {
     if (value === null || esVidrioDisponible(product, value)) setVidrio(value)
   }
+  const whatsappPhone = useWhatsappPhone()
   const whatsappHref = buildWhatsAppUrl(
     buildConfiguredProductMessage(product, seleccion, cantidad, desglose),
+    whatsappPhone,
   )
 
   return (

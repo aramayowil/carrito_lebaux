@@ -56,6 +56,7 @@ src/
 │   │   └── types/
 │   ├── products/         # catálogo, filtros, detalle de producto
 │   ├── checkout/         # flujo de compra
+│   ├── admin/             # panel /admin: auth, formularios y CRUD de contenido
 │   └── theme/             # toggle claro/oscuro
 ├── pages/                # pantallas de ruta, componen features entre sí
 │   └── home/
@@ -68,6 +69,8 @@ src/
 ├── lib/                  # utils genéricas (cn, etc.)
 ├── services/              # cliente http base / config de API
 ├── store/                 # store global (si aplica, fuera de un feature)
+│   └── use-content-store.ts  # fuente de verdad de productos/líneas/obras/
+│                              # beneficios/sitio (ver docs/2026-08-04-panel-admin.md)
 ├── types/                 # ⭐ tipos de dominio globales (catálogo, carrito, sitio)
 ├── data/mock/             # datos mock mientras no hay backend
 └── assets/
@@ -119,7 +122,14 @@ src/
 - [x] Rework visual y responsive de checkout, catálogos, Home, navegación,
       Footer y cards de producto (ver
       `docs/2026-08-03-cierre-rework-visual-responsive.md`).
-- [ ] Conexión a datos reales (hoy `data/mock`).
+- [x] Panel admin en `/admin` (productos, líneas, obras, beneficios y datos
+      del sitio) sobre un store de contenido único en `localStorage`, con
+      login simple hardcodeado. El sitio público lee de ese store, no de
+      `data/mock`, directamente (ver `docs/2026-08-04-panel-admin.md`).
+- [ ] Conexión a datos reales: hoy el admin persiste en `localStorage`
+      (`src/store/use-content-store.ts`); falta reemplazarlo por Supabase
+      (datos + Storage de imágenes) y por Supabase Auth en el login del
+      admin (ver pendientes en `docs/2026-08-04-panel-admin.md`).
 
 Cuando se complete un ítem o se agregue uno nuevo, actualizar esta lista y sumar
 un archivo en `docs/` si la decisión lo amerita.

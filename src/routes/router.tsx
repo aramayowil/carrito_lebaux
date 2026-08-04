@@ -35,4 +35,102 @@ export const router = createBrowserRouter([
       { path: "*", element: <NotFoundPage /> },
     ],
   },
+  {
+    path: "/admin/login",
+    lazy: async () => {
+      const { AdminLoginPage } = await import("@/pages/admin/AdminLoginPage")
+      return { Component: AdminLoginPage }
+    },
+  },
+  {
+    path: "/admin",
+    lazy: async () => {
+      const { RequireAdminAuth } = await import(
+        "@/features/admin/components/RequireAdminAuth"
+      )
+      return { Component: RequireAdminAuth }
+    },
+    children: [
+      {
+        lazy: async () => {
+          const { AdminShell } = await import(
+            "@/features/admin/components/AdminShell"
+          )
+          return { Component: AdminShell }
+        },
+        children: [
+          {
+            index: true,
+            lazy: async () => {
+              const { AdminDashboardPage } = await import(
+                "@/pages/admin/AdminDashboardPage"
+              )
+              return { Component: AdminDashboardPage }
+            },
+          },
+          {
+            path: "productos",
+            lazy: async () => {
+              const { AdminProductsPage } = await import(
+                "@/pages/admin/AdminProductsPage"
+              )
+              return { Component: AdminProductsPage }
+            },
+          },
+          {
+            path: "productos/nuevo",
+            lazy: async () => {
+              const { AdminProductFormPage } = await import(
+                "@/pages/admin/AdminProductFormPage"
+              )
+              return { Component: AdminProductFormPage }
+            },
+          },
+          {
+            path: "productos/:id/editar",
+            lazy: async () => {
+              const { AdminProductFormPage } = await import(
+                "@/pages/admin/AdminProductFormPage"
+              )
+              return { Component: AdminProductFormPage }
+            },
+          },
+          {
+            path: "lineas",
+            lazy: async () => {
+              const { AdminLinesPage } = await import(
+                "@/pages/admin/AdminLinesPage"
+              )
+              return { Component: AdminLinesPage }
+            },
+          },
+          {
+            path: "obras",
+            lazy: async () => {
+              const { AdminObrasPage } = await import(
+                "@/pages/admin/AdminObrasPage"
+              )
+              return { Component: AdminObrasPage }
+            },
+          },
+          {
+            path: "beneficios",
+            lazy: async () => {
+              const { AdminBeneficiosPage } = await import(
+                "@/pages/admin/AdminBeneficiosPage"
+              )
+              return { Component: AdminBeneficiosPage }
+            },
+          },
+          {
+            path: "sitio",
+            lazy: async () => {
+              const { AdminSitePage } = await import("@/pages/admin/AdminSitePage")
+              return { Component: AdminSitePage }
+            },
+          },
+        ],
+      },
+    ],
+  },
 ])

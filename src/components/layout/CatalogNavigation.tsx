@@ -15,15 +15,14 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { productos } from "@/data/mock"
 import {
   CATEGORIAS_PRODUCTO,
-  LINEAS_PRODUCTO,
   ORDEN_CATEGORIAS,
 } from "@/features/products/data/catalog-metadata"
-import type { SlugLineaProducto } from "@/types"
+import { useContentStore } from "@/store/use-content-store"
+import type { Producto, SlugLineaProducto } from "@/types"
 
-function categoriesForLine(line: SlugLineaProducto) {
+function categoriesForLine(productos: Producto[], line: SlugLineaProducto) {
   const present = new Set(
     productos
       .filter((product) => product.linea === line)
@@ -35,6 +34,8 @@ function categoriesForLine(line: SlugLineaProducto) {
 /** Navegación de catálogo para escritorio basada en NavigationMenu de shadcn. */
 export function DesktopCatalogNavigation() {
   const { pathname } = useLocation()
+  const productos = useContentStore((state) => state.productos)
+  const lineas = useContentStore((state) => state.lineas)
 
   return (
     <NavigationMenu className="max-w-none text-white" align="center">
@@ -49,14 +50,14 @@ export function DesktopCatalogNavigation() {
           </NavigationMenuLink>
         </NavigationMenuItem>
 
-        {LINEAS_PRODUCTO.map((line) => (
+        {lineas.map((line) => (
           <NavigationMenuItem key={line.slug}>
             <NavigationMenuTrigger className="rounded-xl bg-transparent px-4 text-white/85 hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary data-open:bg-primary/10 data-open:text-primary data-open:hover:bg-primary/10 data-open:hover:text-primary data-open:focus:bg-primary/10 data-popup-open:bg-primary/10 data-popup-open:text-primary data-popup-open:hover:bg-primary/10 data-popup-open:hover:text-primary">
               {line.nombre.replace("Línea ", "")}
             </NavigationMenuTrigger>
             <NavigationMenuContent className="w-[min(36rem,calc(100vw-2rem))] rounded-2xl bg-brand-graphite p-4 text-white">
               <ul className="grid gap-2 sm:grid-cols-2">
-                {categoriesForLine(line.slug).map((category) => {
+                {categoriesForLine(productos, line.slug).map((category) => {
                   const metadata = CATEGORIAS_PRODUCTO[category]
                   const Icon = metadata.icono
                   return (
@@ -115,9 +116,12 @@ interface MobileCatalogNavigationProps {
 export function MobileCatalogNavigation({
   onNavigate,
 }: MobileCatalogNavigationProps) {
+  const productos = useContentStore((state) => state.productos)
+  const lineas = useContentStore((state) => state.lineas)
+
   return (
     <Accordion className="rounded-2xl border-white/10 bg-white/[0.04] text-white">
-      {LINEAS_PRODUCTO.map((line) => (
+      {lineas.map((line) => (
         <AccordionItem
           key={line.slug}
           value={line.slug}
@@ -127,7 +131,7 @@ export function MobileCatalogNavigation({
             {line.nombre}
           </AccordionTrigger>
           <AccordionContent className="grid grid-cols-2 gap-2 px-0 [&_a]:no-underline [&_a]:hover:text-white">
-            {categoriesForLine(line.slug).map((category) => {
+            {categoriesForLine(productos, line.slug).map((category) => {
               const metadata = CATEGORIAS_PRODUCTO[category]
               const Icon = metadata.icono
               return (

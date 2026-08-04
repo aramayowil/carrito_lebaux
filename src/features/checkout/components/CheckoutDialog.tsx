@@ -23,7 +23,7 @@ import { buildOrderMessage } from "@/features/checkout/lib/order-message"
 import type { FormaPago } from "@/features/checkout/types/checkout"
 import { formatProductPrice } from "@/features/products/lib/product-card-formatters"
 import { cn } from "@/lib/utils"
-import { buildWhatsAppUrl } from "@/lib/whatsapp"
+import { buildWhatsAppUrl, useWhatsappPhone } from "@/lib/whatsapp"
 
 /** Recoge los datos mínimos y genera el pedido final para WhatsApp. */
 export function CheckoutDialog() {
@@ -51,7 +51,11 @@ export function CheckoutDialog() {
       nombre: nombre.trim(),
       formaPago,
     })
-    window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer")
+    window.open(
+      buildWhatsAppUrl(message, whatsappPhone),
+      "_blank",
+      "noopener,noreferrer",
+    )
     setOpen(false)
     setExitoAbierto(true)
   }
