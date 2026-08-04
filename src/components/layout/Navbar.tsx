@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { House, Menu, X } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
@@ -22,15 +22,59 @@ import { cn } from "@/lib/utils"
 /** Cabecera principal con catálogo accesible en desktop y mobile. */
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [navbarVisible, setNavbarVisible] = useState(true)
+  const lastScrollY = useRef(0)
+  const animationFrame = useRef<number | null>(null)
   const whatsappHref = buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE)
-  const homeClassName = ({ isActive }: { isActive: boolean }) =>
-    cn(
-      "relative rounded-xl px-4 py-2 text-sm font-medium text-white/85 hover:bg-primary/10 hover:text-primary",
-      isActive && "bg-primary/10 text-primary",
-    )
 
+  useEffect(() => {
+    lastScrollY.current = window.scrollY
+
+    const handleScroll = () => {
+      if (animationFrame.current !== null) return
+
+      animationFrame.current = window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY
+        const scrollDelta = currentScrollY - lastScrollY.current
+
+        if (currentScrollY <= 80) {
+          setNavbarVisible(true)
+          lastScrollY.current = currentScrollY
+        } else if (Math.abs(scrollDelta) >= 8) {
+          setNavbarVisible(scrollDelta < 0)
+          lastScrollY.current = currentScrollY
+        }
+
+        animationFrame.current = null
+      })
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+
+      if (animationFrame.current !== null) {
+        window.cancelAnimationFrame(animationFrame.current)
+      }
+    }
+  }, [])
+
+  const handleMobileMenuChange = (open: boolean) => {
+    setMobileMenuOpen(open)
+
+    if (open) {
+      setNavbarVisible(true)
+    }
+  }
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-navbar border-b border-white/5 bg-brand-black shadow-lg">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 h-navbar transform-gpu border-b border-white/5 bg-brand-black shadow-lg transition-transform duration-300 ease-out will-change-transform",
+        navbarVisible ? "translate-y-0" : "-translate-y-full",
+      )}
+      onFocusCapture={() => setNavbarVisible(true)}
+    >
       <div className="mx-auto flex h-full max-w-screen-2xl items-center justify-between px-4 sm:px-6">
         <Logo />
 
@@ -38,9 +82,6 @@ export function Navbar() {
           aria-label="Principal"
           className="hidden items-center gap-1 lg:flex"
         >
-          <NavLink to="/" end className={homeClassName}>
-            Inicio
-          </NavLink>
           <DesktopCatalogNavigation />
           <Button
             variant="whatsapp"
@@ -55,15 +96,32 @@ export function Navbar() {
           />
         </nav>
 
-        <div className="lg:hidden">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <div className="flex items-center gap-2 lg:hidden">
+          <Button
+            variant="whatsapp"
+            size="lg"
+            className="size-11 rounded-xl px-0 sm:w-auto sm:px-4"
+            render={
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Pedir presupuesto por WhatsApp"
+              />
+            }
+          >
+            <WhatsAppIcon aria-hidden="true" />
+            <span className="hidden sm:inline">Presupuesto</span>
+          </Button>
+
+          <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuChange}>
             <SheetTrigger
               render={
                 <Button
                   variant="ghost"
-                  size="icon"
+                  size="icon-lg"
                   aria-label="Abrir menú de navegación"
-                  className="rounded-xl border border-white/10 bg-white/5 text-white hover:bg-primary/10 hover:text-primary"
+                  className="size-11 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-primary/10 hover:text-primary"
                 />
               }
             >

@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import {
   Accordion,
@@ -34,9 +34,21 @@ function categoriesForLine(line: SlugLineaProducto) {
 
 /** Navegación de catálogo para escritorio basada en NavigationMenu de shadcn. */
 export function DesktopCatalogNavigation() {
+  const { pathname } = useLocation()
+
   return (
     <NavigationMenu className="max-w-none text-white" align="center">
       <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuLink
+            active={pathname === "/"}
+            render={<Link to="/" />}
+            className="h-9 rounded-xl px-4 text-white/85 hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:hover:bg-primary/10 data-[active=true]:focus:bg-primary/10"
+          >
+            Inicio
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
         {LINEAS_PRODUCTO.map((line) => (
           <NavigationMenuItem key={line.slug}>
             <NavigationMenuTrigger className="rounded-xl bg-transparent px-4 text-white/85 hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary data-open:bg-primary/10 data-open:text-primary data-open:hover:bg-primary/10 data-open:hover:text-primary data-open:focus:bg-primary/10 data-popup-open:bg-primary/10 data-popup-open:text-primary data-popup-open:hover:bg-primary/10 data-popup-open:hover:text-primary">
